@@ -89,6 +89,14 @@ body {
   /* Scurisce il colore del 15% */
 }
 
+.defaultButtonSkin {
+  background: #36454f;
+  box-shadow: inset 0 0 0 2px #ffffff;
+  border-radius: 2vh;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
 .centerDiv {
   display: flex;
   justify-content: center;
@@ -125,6 +133,8 @@ button,
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-weight: 500;
 }
 
 #selectorTab {
@@ -141,7 +151,7 @@ button,
   position: absolute;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content:left;
   height: 100%;
   width: 50%;
 }
@@ -164,6 +174,15 @@ button,
   width: 7%;
 }
 
+.visualModuleText {
+  align-content: center;
+  text-align: center;
+
+  width: fit-content;
+
+  padding: 10%;
+}
+
 #visualModule1 {
   position: absolute;
   right: 50%;
@@ -183,6 +202,19 @@ button,
   right: 40%;
   transform: translate3d(60%, 0, 0);
   top: 50%;
+}
+
+#componentSelectorText {
+  position: absolute;
+  right: 50%;
+  transform: translate3d(50%, 0, 0);
+  top: 1%;
+
+  align-content: center;
+  text-align: center;
+
+  width: 50%;
+  height: 10%;
 }
 
 #loadout {
@@ -267,7 +299,9 @@ button,
   box-shadow: inset 0 0 0 1px #ffffff;
 
   display: grid;
-  grid-template-columns: repeat(1, 4fr);
+
+  grid-template-columns: repeat(3, 3fr);
+  grid-template-rows: repeat(2, 2fr);
 }
 
 #componentTab div {
@@ -278,36 +312,40 @@ button,
   position: absolute;
   left: 0%;
   top: 35%;
-  width: 25%;
+  width: 25%; /* Larghezza del contenitore principale */
   height: 50%;
   font-family: 'Arial', sans-serif;
+  box-sizing: border-box; /* Include il padding nel calcolo della larghezza e altezza */
 }
 
-#componentsList>div {
+#componentsList > div {
   width: 100%;
-
+  height: max-content; /* Assicurati che riempia tutto il contenitore */
   padding: 3%;
+  box-sizing: border-box; /* Include il padding nel calcolo della larghezza e altezza */
 }
 
-#componentsList>div>div {
-
+#componentsList > div > div {
   position: relative;
-
   width: 100%;
+  height: 100%;
+  box-sizing: border-box; /* Include il padding nel calcolo della larghezza */
 }
 
-#componentsList>div>div>div {
+#componentsList > div > div > div {
   position: relative;
-
-  height: 10%;
-  width: max-content;
-
+  height: 10%;  /* Mantieni l'altezza al 10% se desiderato */
+  width: 100%;  /* Assicurati che occupi il 100% del contenitore genitore */
   padding: 3%;
-
   background: #487145;
   box-shadow: inset 0 0 0 2px #ffffff;
   color: #ffffff;
   font-family: 'Arial', sans-serif;
+  box-sizing: border-box; /* Include il padding nel calcolo della larghezza */
+
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;     /* Centra verticalmente */
 }
 
 #componentsList>div>div>button {
@@ -362,11 +400,21 @@ button,
 }
 
 #software1assimilationCenter {
-  position: absolute;
-  left: 50%;
-  top: 0%;
-  width: 50%;
-  height: 100%;
+  position: relative;
+
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#software2assimilationCenter {
+  position: relative;
+
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 11;
 }
 
 .assimilationBaseGrid {
@@ -378,7 +426,7 @@ button,
   grid-template-rows: repeat(10, 10fr);
 
   width: 100%;
-  height: 85%;
+  height: 100%;
 
   z-index: 1;
 }
@@ -404,28 +452,49 @@ button,
 
 
 #assimilationBaseGridbutton1 {
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-start: 3;
+  grid-row-end: 7;
   grid-column-start: 1;
-  grid-column-end: 1;
+  grid-column-end: 4;
 }
 
 #assimilationBaseGridbutton2 {
-  grid-row-start: 1;
-  grid-row-end: 1;
-  grid-column-start: 2;
-  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 4;
+  grid-column-end: 7;
 }
 
 #assimilationBaseGridbutton3 {
-  grid-row-start: 1;
-  grid-row-end: 1;
-  grid-column-start: 3;
-  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 10;
+}
+
+#assimilationBaseGridbutton4 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#assimilationBaseGridbutton5 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 4;
+  grid-column-end: 7;
+}
+
+#assimilationBaseGridbutton6 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 10;
 }
 
 
-#softwareUpgradesBase {
+.softwareUpgradesBase {
   position: relative;
   width: 100%;
   height: 70%;
@@ -434,26 +503,28 @@ button,
 
 .softwareUpgradesCont {
   position: relative;
-  height: 60%;
+  height: 100%;
   width: 100%;
 }
 
-#softwareUpgradesCont>div {
+.softwareUpgradesCont>div {
   position: relative;
   height: 100%;
   width: 100%;
 }
 
-#softwareUpgradesCont>div>button {
+.softwareUpgradesCont>div>button {
   position: relative;
-  padding: 1%;
   width: 100%;
-  height: 20%;
+  height: 25%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
 }
 
-#softwareUpgradesCont>div>button>div {
+.softwareUpgradesCont>div>button>div {
   position: relative;
   padding: 1%;
   display: flex;
@@ -461,42 +532,41 @@ button,
   text-align: left;
   align-items: center;
 
+  font-size: 80%;
+
   pointer-events: none;
 }
 
-#softwareUpgradesCont>div>button>div:nth-child(1) {
+.softwareUpgradesCont>div>button>div:nth-child(1) {
   width: 50%;
 }
 
-#softwareUpgradesCont>div>button>div:nth-child(2) {
+.softwareUpgradesCont>div>button>div:nth-child(2) {
   width: 20%;
 }
 
-#softwareUpgradesCont>div>button>div:nth-child(3) {
+.softwareUpgradesCont>div>button>div:nth-child(3) {
   width: 30%;
 }
 
-#softwareUpgradesCont>div>div>div {
+.softwareUpgradesCont>div>div>div {
   pointer-events: none;
-}
-
-#softwareUpgradesAssimilate {
-  position: relative;
-  height: 25%;
-  width: 100%;
 }
 
 .assimilationCenterBase {
   position: relative;
   width: 100%;
-  height: 70%;
+  height: 100%;
 
 }
 
-.softwareUpgradesInfo {
+#softwareUpgradesInfo {
   position: relative;
-  width: 100%;
-  height: 15%;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 6;
 
   display: flex;
   align-items: center;
@@ -504,16 +574,19 @@ button,
   justify-content: space-between;
 }
 
-.softwareUpgradesInfo>div {
+#softwareUpgradesInfo>div {
   position: relative;
 
   margin: 1%;
 }
 
-.assimilationCenterInfo {
+#softwareUpgradesInfo2 {
   position: relative;
-  width: 100%;
-  height: 15%;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 6;
 
   display: flex;
   align-items: center;
@@ -521,7 +594,47 @@ button,
   justify-content: space-between;
 }
 
-.assimilationCenterInfo>div {
+#softwareUpgradesInfo2>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#software1assimilationCenterInfo {
+  position: relative;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 6;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#software1assimilationCenterInfo>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#software2assimilationCenterInfo {
+  position: relative;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 6;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#software2assimilationCenterInfo>div {
   position: relative;
 
   margin: 1%;
@@ -645,7 +758,7 @@ input[type=text] {
   left: 12.5%;
   top: 25%;
 
-  background: #174d00;
+  background: #004526;
 
   display: flex;
   justify-content: center;
@@ -662,43 +775,45 @@ input[type=text] {
   pointer-events: none;
 }
 
-#componentFlex1 {
-
-  position: relative;
-
-  display: flex;
-  flex-direction: row;
-
-  height: 100%;
-}
 
 #componentLevel {
-  position: relative;
-
-  flex: 1 3 auto;
-
-  display: flex;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  background:none;
 
 }
 
 #componentName {
-  position: relative;
-
-  flex: 1 1 auto;
-
-  font-weight: bold;
-
-  display: flex;
-  align-items: center;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  background:none;
 }
 
+
+
 #componentEffect {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  background:none;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#componentEffect>div {
   position: relative;
 
   display: flex;
   align-items: center;
-
-  height: 100%;
+  flex-direction: column;
+  
 }
 
 #cellsValute {
@@ -804,6 +919,15 @@ input[type=text] {
 }
 
 #expansor2 {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 100%;
+}
+
+#expansor3 {
   position: relative;
 
   width: 100%;
@@ -999,6 +1123,40 @@ input[type=text] {
   position: relative;
   height: 100%;
   width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 3fr);
+
+  overflow-y: scroll;
+}
+
+.monuments>div {
+
+  /* Centra orizzontalmente */
+  align-items: left;
+
+  border-style:double;
+  border-radius: 1%;
+
+  height: 100%;
+}
+
+.monuments>div>div {
+
+  display: flex;
+
+  flex-direction: row;
+
+  justify-content: left;
+  /* Centra orizzontalmente */
+  align-items: left;
+
+  height: auto;
+
+  padding: 2%;
+
+  z-index: -100;
 }
 
 .baseMonuments {
@@ -1027,15 +1185,15 @@ input[type=text] {
   overflow-y: scroll;
 }
 
-.monumentsGrid> div  {
+.monumentsGrid>div {
 
-  position:relative;
+  position: relative;
 
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
 
-  height: 20%;
+  height: fit-content;
 }
 
 
@@ -1055,50 +1213,12 @@ input[type=text] {
   background: #36454f;
 }
 
-#energyTab {
-  position: relative;
-  width: 50%;
-  height: 100%;
+.monumentName{
+  font-weight: bold;
+  text-transform: uppercase;
+
+  font-size: 125%;
 }
-
-#energyInfo {
-  position: relative;
-  width: 50%;
-  height: 15%;
-
-  display: flex;
-  align-items: center;
-
-  justify-content: space-between;
-}
-
-#energyInfo>div {
-  position: relative;
-
-  margin: 1%;
-}
-
-#respectEnergy {
-  width: 50%;
-}
-
-#energyGrid {
-  position: relative;
-  width: 50%;
-  height: 60%;
-
-  display: grid;
-
-  grid-template-columns: repeat(2, 2fr);
-  grid-template-rows: repeat(3, 3fr);
-
-  z-index: 1;
-}
-
-#energyGrid>button>div {
-  pointer-events: none;
-}
-
 
 #energyOverclock {
   position: absolute;
@@ -1126,7 +1246,7 @@ input[type=text] {
   grid-template-rows: repeat(10, 10fr);
 }
 
-#screen > * {
+#screen>* {
   background: #36454f;
   box-shadow: inset 0 0 0 2px #ffffff;
   border-radius: 3vh;
@@ -1141,20 +1261,15 @@ input[type=text] {
   font-size: 100%;
 }
 
-#screen > * > * {
+#screen>*>* {
   pointer-events: none;
 }
 
 #screenCanvas {
   position: absolute;
 
-  background: gray;
   top: 0%;
   left: 0%;
-  height: 100%;
-  width: 100%;
-
-  z-index: 1;
 }
 
 #A1 {
@@ -1309,33 +1424,33 @@ input[type=text] {
   background: #36454f;
 }
 
-#hardware1Info> div {
+#hardware1Info>div {
   position: relative;
 
   margin: 1%;
 }
 
 #hardware1Content1 {
-  grid-row-start:2;
+  grid-row-start: 2;
   grid-row-end: 5;
   grid-column-start: 1;
   grid-column-end: 11;
 }
 
-#automation1{
-  grid-row-start:5;
+#automation1 {
+  grid-row-start: 5;
   grid-row-end: 6;
   grid-column-start: 1;
   grid-column-end: 11;
 }
 
-#automation1 > div {
+#automation1>div {
   pointer-events: none;
 }
 
 #hardware1Content2 {
 
-  grid-row-start:6;
+  grid-row-start: 6;
   grid-row-end: 11;
   grid-column-start: 1;
   grid-column-end: 11;
@@ -1355,33 +1470,144 @@ input[type=text] {
   background: #36454f;
 }
 
-#hardware2Info> div {
+#hardware2Info>div {
   position: relative;
 
   margin: 1%;
 }
 
 #hardware2Content1 {
-  grid-row-start:2;
+  grid-row-start: 2;
   grid-row-end: 5;
   grid-column-start: 1;
   grid-column-end: 11;
 }
 
-#automation2{
-  grid-row-start:5;
+#automation2 {
+  grid-row-start: 5;
   grid-row-end: 6;
   grid-column-start: 1;
   grid-column-end: 11;
 }
 
-#automation2 > div {
+#automation2>div {
   pointer-events: none;
 }
 
 #hardware2Content2 {
 
-  grid-row-start:6;
+  grid-row-start: 6;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#software1Content1 {
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+#software1Content2 {
+  grid-row-start: 6;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#energyInfo {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#energyInfo>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#respecEnergy {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#energyGrid {
+  position: relative;
+
+  display: grid;
+
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  grid-template-columns: repeat(2, 2fr);
+  grid-template-rows: repeat(2, 2fr);
+
+  z-index: 1;
+}
+
+#energyGrid>button>div {
+  pointer-events: none;
+}
+
+#communication1Content1 {
+  grid-row-start: 7;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#hardware3Info {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: #36454f;
+}
+
+#hardware3Info>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#hardware3Content1 {
+  grid-row-start: 2;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#automation3 {
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#automation3>div {
+  pointer-events: none;
+}
+
+#hardware3Content2 {
+  grid-row-start: 6;
   grid-row-end: 11;
   grid-column-start: 1;
   grid-column-end: 11;

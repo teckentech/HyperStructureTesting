@@ -22,9 +22,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   createClassInstance()
 
   passiveImport()
-  IShowableClass.init = true;
   saveGameData();
   idleTimeChecker()
+
+  IShowableClass.init = true;
+  resetCanvas()
 
 });
 
@@ -73,9 +75,11 @@ class ShowableClass {
       valute: true,
       cellsValute: true, assimilatedValute: false, energyValute: false, potentialValute: false,
 
-      core: true, hardware: false, communication: false, options: false, progress: false,
+      core: true, options: false, progress: false, progressTab: false,
 
-      coreTab: true, hardwareTab: false, softwareTab: false, communicationTab: false,
+      hardware: false,
+
+      coreTab: true, hardwareTab: false,
 
       visualModule2: true, visualModule3: false,
 
@@ -84,6 +88,9 @@ class ShowableClass {
       componentsList: false, component1List: false, component2List: false, component3List: false, componentsButtons: false, componentTab: false, componentsSummary: false,
 
       hardwareSummary: true, softwareSummary: true, communicationSummary: false,
+
+      //componentsList
+      components1Tier2: false, components2Tier2: false, components3Tier2: false,
 
       //layers
       opaqueScreen: false, hardware1: false, hardware2: false, hardware3: false,
@@ -103,6 +110,7 @@ class ShowableClass {
 
       //expansors
 
+
       expansor1: true, expansor2: true, expansor3: false, expansor4: false,
 
       expansor1U1: false, expansor1U2: false,
@@ -111,17 +119,32 @@ class ShowableClass {
       expansor4U1: false, expansor4U2: false,
 
       monument1: true, monument2: false, monument3: false, monument4: false, monument5: false, monument6: false, monument7: false, monument8: false, monument9: false, monument10: false,
+      monument11: false, monument12: false, monument13: false, monument14: false, monument15: false, monument16: false, monument17: false, monument18: false, monument19: false, monument20: false, monument21: false,
 
+
+      //softUpgrades
+
+      softUpgrade1: false, softUpgrade2: false, softUpgrade3: false, softUpgrade4: false, softUpgrade5: false, softUpgrade6: false, softUpgrade7: false,
       //assimilation
 
       assimilation1: true,
+      software1assimilationCenterInfo: false,
       software1assimilationCenter: false,
-      assimilationBaseGridbutton1: false,
-      assimilationBaseGridbutton2: false,
-      assimilationBaseGridbutton3: false,
+      assimilationBaseGridbutton1: true,
+      assimilationBaseGridbutton2: true,
+      assimilationBaseGridbutton3: true,
+
+      assimilation2: true,
+      software2assimilationCenterInfo: false,
+      software2assimilationCenter: false,
+      assimilationBaseGridbutton4: true,
+      assimilationBaseGridbutton5: true,
+      assimilationBaseGridbutton6: true,
 
       //automation
+
       automation1: false, automation2: false, automation3: false, automation4: false, automation5: false,
+
     }
 
   }
@@ -134,8 +157,8 @@ class TopProgress {
 
     this.progress = Object.freeze({
       p1: "Hardware Layer at 100 cells", p1Check: function () { return IGameData.cells >= 100 },
-      p2: "Software Layer at 1e6 cells", p2Check: function () { return IGameData.cells >= (10 ** 6) },
-      p3: "Communication Layer at 1e25 cells", p3Check: function () { return IGameData.cells >= (10 ** 25) }
+      p2: "Software Layer at 1e6 cells", p2Check: function () { return checkShow("A2") },
+      p3: "Communication Layer at 1e25 cells", p3Check: function () { return checkShow("A4") }
     });
 
   }
@@ -163,47 +186,47 @@ class Components {
 
     this.components = options.components || {
       token1: {
-        name: "PRODUCER", nameF: true, description: "CELLS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token1.png', imageF: true, active: false
+        name: "PRODUCER", nameF: true, description: "CELLS/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token1.png', imageF: true, active: false
       },
 
       token2: {
-        name: "BUILDER", nameF: true, description: "EXPANSION/S ^ ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token2.png', imageF: true, active: false
+        name: "BUILDER", nameF: true, description: `<div>(EXPANSION: ${IGameData.expansionProd})</div><div>EXPANSION/S: ^</div>`, descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token2.png', imageF: true, active: false
       },
 
       token3: {
-        name: "MULTIMAKER", nameF: true, description: "ALL VALUTE/S X: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token3.png', imageF: true, active: false
+        name: "MULTIMAKER", nameF: true, description: "ALL VALUTE/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token3.png', imageF: true, active: false
       },
 
       token4: {
-        name: "POPULATION CONVERTER", nameF: true, description: "CELLS/S is reduce by 90%, POPULATION/S X: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token4.png', imageF: true, active: false
+        name: "POPULATION CONVERTER", nameF: true, description: "CELLS/S is reduce by 90%, POPULATION/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token4.png', imageF: true, active: false
       },
 
       token5: {
-        name: "ALLY SYNERGY", nameF: true, description: "all equipped COMPONENT EFFECT is boosted X: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token5.png', imageF: true, active: false
+        name: "ALLY SYNERGY", nameF: true, description: "all equipped COMPONENTS LEVEL: +", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token5.png', imageF: true, active: false
       },
 
       token6: {
-        name: "ENERGY INFLUX", nameF: true, description: "all valute is reduced by 90%, ENERGY/S X: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token6.png', imageF: true, active: false
+        name: "ENERGY INFLUX", nameF: true, description: "all valute is reduced by 90%, ENERGY/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token6.png', imageF: true, active: false
       },
 
       token7: {
-        name: "UNIVERSAL PRODUCER", nameF: true, description: "AXIOMS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token7.png', imageF: true, active: false
+        name: "UNIVERSAL PRODUCER", nameF: true, description: "AXIOMS/S: +", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token7.png', imageF: true, active: false
       },
 
       token8: {
-        name: "ENERGIZED THING1", nameF: true, description: "AXIOMS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token8.png', imageF: true, active: false
+        name: "CHARGED PRODUCER", nameF: true, description: "ENERGY/S is reduced by 50% compound, CELLS/S: +", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token8.png', imageF: true, active: false
       },
 
       token9: {
-        name: "ENERGIZED THING2", nameF: true, description: "AXIOMS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token_4.png', imageF: true, active: false
+        name: "CHARGED BUILDER", nameF: true, description: `ENERGY/S is reduced by 50% compound, <div>(EXPANSION: ${IGameData.expansionProd})</div><div>EXPANSION/S: ^</div>`, descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token9.png', imageF: true, active: false
       },
 
       token10: {
-        name: "ENERGIZED THING3", nameF: true, description: "AXIOMS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token_4.png', imageF: true, active: false
+        name: "CHARGED MULTIMAKER", nameF: true, description: "ENERGY/S is reduced by 50% compound, ALL VALUTE/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token10.png', imageF: true, active: false
       },
 
       token11: {
-        name: "ENERGIZED THING4", nameF: true, description: "AXIOMS/S: ", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component3", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token_4.png', imageF: true, active: false
+        name: "CHARGED POPULATION CONVERTER", nameF: true, description: "ENERGY/S is reduced by 50% compound, CELLS/S is reduce by 90%, POPULATION/S: X", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component2", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token11.png', imageF: true, active: false
       },
     }
   }
@@ -233,53 +256,45 @@ class Expansor {
     options = options || {}
     this.expansors = options.expansors || {
       expansor1: {
-        name: "Unit", nameF: true, description: "EXPANSION/S: ", descriptionF: true, level: 0, maxLevel: 2401, effect: 0, price1: 0, price2: 0, price3: 0, price4: 0, priceIdentity1: "cells", priceIdentity1F: true, priceIdentity2: "", priceIdentity2F: true, priceIdentity3: "", priceIdentity3F: true, priceIdentity4: "", priceIdentity4F: true
+        name: "Unit", nameF: true, description: "EXPANSION/S: +", descriptionF: true, level: 0, maxLevel: 2401, effect: 0, price1: 0, priceIdentity: "cells", priceIdentityF: true
       },
 
       expansor2: {
-        name: "Block", nameF: true, description: "UNIT Max Level: ", descriptionF: true, level: 0, maxLevel: 343, effect: 0, price1: 0, price2: 0, price3: 0, price4: 0, priceIdentity1: "cells", priceIdentity1F: true, priceIdentity2: "assimilated", priceIdentity2F: true, priceIdentity3: "", priceIdentity3F: true, priceIdentity4: "", priceIdentity4F: true
+        name: "Block", nameF: true, description: "UNIT Max Level: +", descriptionF: true, level: 0, maxLevel: 343, effect: 0, price1: 0, priceIdentity: "assimilated", priceIdentityF: true
       },
 
       expansor3: {
-        name: "Sector", nameF: true, description: "UNIT PRICE/:", descriptionF: true, level: 0, maxLevel: 49, effect: 0, price1: 0, price2: 0, price3: 0, price4: 0, priceIdentity1: "cells", priceIdentity1F: true, priceIdentity2: "assimilated", priceIdentity2F: true, priceIdentity3: "energy", priceIdentity3F: true, priceIdentity4: "", priceIdentity4F: true
+        name: "Sector", nameF: true, description: "BLOCK Max Level: +", descriptionF: true, level: 0, maxLevel: 49, effect: 0, price1: 0, priceIdentity: "energy", priceIdentityF: true
       },
 
       expansor4: {
-        name: "Cluster", nameF: true, description: "Sector: x ", descriptionF: true, level: 0, maxLevel: 7, effect: 0, price1: 0, price2: 0, price3: 0, price4: 0, priceIdentity1: "cells", priceIdentity1F: true, priceIdentity2: "assimilated", priceIdentity2F: true, priceIdentity3: "energy", priceIdentity3F: true, priceIdentity4: "potential", priceIdentity4F: true
+        name: "Cluster", nameF: true, description: "Sector: X", descriptionF: true, level: 0, maxLevel: 7, effect: 0, price1: 0, priceIdentity: "potential", priceIdentityF: true
       },
     }
 
     this.expansorsUpgrades = options.expansorsUpgrades || {
       expansor1U1: {
-        description: "UNIT effect gives CELLS/S: ", descriptionF: true, effect: 0, group: "group1", groupF: false, descriptionF: true, active: false
+        description: "UNIT effect gives CELLS/S: +", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
       },
 
       expansor1U2: {
-        description: "UNIT boosts EXPANSION/S: ", descriptionF: true, effect: 0, group: "group1", groupF: false, descriptionF: true, active: false
+        description: "UNIT boosts UNIT EFFECT: X", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
       },
 
       expansor2U1: {
-        description: "MAX POPULATION X: ", descriptionF: true, effect: 0, group: "group3", groupF: false, descriptionF: true, active: false
+        description: "MAX POPULATION: X", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
       },
 
       expansor2U2: {
-        description: "SECTOR makes UNIT cheaper /: ", descriptionF: true, effect: 0, group: "group3", groupF: false, descriptionF: true, active: false
+        description: "BLOCK makes UNIT cheaper: /", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
       },
 
       expansor3U1: {
-        description: "", descriptionF: true, effect: 0, group: "", groupF: false, descriptionF: true, active: false
+        description: "SECTOR boosts ENERGY/S: X", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
       },
 
       expansor3U2: {
-        description: "", descriptionF: true, effect: 0, group: "", groupF: false, descriptionF: true, active: false
-      },
-
-      expansor4U1: {
-        description: "", descriptionF: true, effect: 0, group: "", groupF: false, descriptionF: true, active: false
-      },
-
-      expansor4U2: {
-        description: "", descriptionF: true, effect: 0, group: "", groupF: false, descriptionF: true, active: false
+        description: "UNIT price: /", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
       },
     }
 
@@ -318,7 +333,7 @@ class Expansor {
       },
 
       monument8: {
-        name: "Easy Block Transportation", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware 2: Block Upgrades", unlockedF: true, active: false
+        name: "Grid Transportation", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware 2: Block Upgrades", unlockedF: true, active: false
       },
 
       monument9: {
@@ -329,6 +344,49 @@ class Expansor {
         name: "Multi Layer City", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "New Layers", unlockedF: true, active: false
       },
 
+      monument11: {
+        name: "One State", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Software1: Population Center", unlockedF: true, active: false
+      },
+
+      monument12: {
+        name: "Capitalism Oriented Production", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Software Components: Population Converter", unlockedF: true, active: false
+      },
+
+      monument13: {
+        name: "Super Computers", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "New Layers", unlockedF: true, active: false
+      },
+
+      monument14: {
+        name: "Incorporated Generators", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware Components: Charged Components", unlockedF: true, active: false
+      },
+
+      monument15: {
+        name: "Free Electricity", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Software Components: Charged Components", unlockedF: true, active: false
+      },
+
+      monument16: {
+        name: "Cooperating Particles", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Communication Components: New Components", unlockedF: true, active: false
+      },
+
+      monument17: {
+        name: "hardware 3 monument1", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware 3: Sector Upgrades", unlockedF: true, active: false
+      },
+
+      monument18: {
+        name: "hardware 3 monument2", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware 3: Sector Upgrades both active", unlockedF: true, active: false
+      },
+
+      monument19: {
+        name: "hardware 3 monument3", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Hardware 3: Automation: Sector", unlockedF: true, active: false
+      },
+
+      monument20: {
+        name: "The First Pillar", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "New Layers", unlockedF: true, active: false
+      },
+
+      monument21: {
+        name: "Software2", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Software 2: Population Center", unlockedF: true, active: false
+      },
 
     }
   }
@@ -346,7 +404,7 @@ class SelUpgrade {
 
       //assimilation Upgrades
       group2: {
-        num: 0, maxNum: 5, lastSel: "", maxNumF: true
+        num: 0, maxNum: 1, lastSel: "", maxNumF: true
       },
 
       //expansor upgrades 2
@@ -354,7 +412,13 @@ class SelUpgrade {
         num: 0, maxNum: 1, lastSel: "", maxNumF: true
       },
 
+      //expansor upgrades 3
       group4: {
+        num: 0, maxNum: 1, lastSel: "", maxNumF: true
+      },
+
+      //assimilation Upgrades 2
+      group5: {
         num: 0, maxNum: 1, lastSel: "", maxNumF: true
       },
     }
@@ -369,64 +433,63 @@ class Software {
 
     this.upgrades = options.upgrades || {
       softUpgrade1: {
-        name: "MAX POPULATION X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "MAX POPULATION: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade2: {
-        name: "POPULATION/S X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "POPULATION/S: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade3: {
-        name: "T1 COMPONENTS Price /: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "T1 COMPONENTS Price: /", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade4: {
         name: "POPULATION CENTER selectable: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
-/*
+
+      //software upgrades 2
+
       softUpgrade5: {
-        name: "MAX POPULATION X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "MAX POPULATION: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade6: {
-        name: "TIER boost ASSIM. CENTER: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
-      },
-
-      softUpgrade7: {
         name: "ENERGY UPGRADES PRICE /:", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
-      softUpgrade8: {
+      softUpgrade7: {
         name: "POPULATION CENTER selectable: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
-      */
     }
 
     this.assimilationCenter = options.assimilationCenter || {
       button1: {
-        name: "Open Population Center", description: "MAX POPULATION X: ", effect: 0, price: 0, priceIdentity: "ASSIMILATED", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Open Population Center", description: "MAX POPULATION: X", effect: 0, price: 0, priceIdentity: "ASSIMILATED", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button2: {
-        name: "Intranet Jobs", description: "boost CELLS/S by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Intranet Jobs", description: "CELLS/S: X", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button3: {
-        name: "Deep Sleep Protocol", description: "boost POPULATION/S by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Deep Sleep Protocol", description: "POPULATION/S: X", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
-      /*
+
       button4: {
-        name: "Deeper Processes", description: "MAX POPULATION boosts POPULATION/S: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Deeper Processes", description: "POPULATION boosts POPULATION/S: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button5: {
-        name: "Centralized Energy", description: "boost ENERGY/S by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Centralized Energy", description: "boost ENERGY/S by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button6: {
-        name: "Global Intranet", description: "boost TICKSPEED by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
+        name: "Global Intranet", description: "boost TICKSPEED by: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
+
+      /*
 
       button7: {
         name: "Tecnological Revolution", description: "TIER boost is doubled: ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true
@@ -451,22 +514,22 @@ class Energy {
     this.energyUpgrades = options.energyUpgrades || {
 
       energyButton1: {
-        name: "ENERGY/S: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ENERGY/S: +", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton2: {
-        name: "All ENERGY UPGRADES X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "All ENERGY UPGRADES: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton3: {
-        name: "All ENERGY COMPONENTS X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "All ENERGY COMPONENTS: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton4: {
-        name: "ENERGY boosts all VALUTES X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ENERGY boosts all VALUTES: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton5: {
-        name: "OVERCLOCK effect X: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "OVERCLOCK effect: X", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton6: {
-        name: "OVERCLOCK quantity: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "OVERCLOCK quantity: +", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
 
     }
@@ -487,31 +550,31 @@ class Canvas {
         startX: 0.1, startY: 0.5, controlPX: 0.1, controlPY: 0.5, endX: 0.3, endY: 0.7, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line3: {
-        startX: 0.3, startY: 0.3, controlPX: 0.3, controlPY: 0.3, endX: 0.7, endY: 0.7, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.3, startY: 0.3, controlPX: 0.3, controlPY: 0.3, endX: 0.5, endY: 0.1, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line4: {
-        startX: 0.3, startY: 0.7, controlPX: 0.3, controlPY: 0.7, endX: 0.7, endY: 0.3, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.3, startY: 0.3, controlPX: 0.3, controlPY: 0.3, endX: 0.5, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line5: {
-        startX: 0.5, startY: 0.1, controlPX: 0.5, controlPY: 0.1, endX: 0.9, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.3, startY: 0.7, controlPX: 0.3, controlPY: 0.7, endX: 0.5, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line6: {
-        startX: 0.5, startY: 0.9, controlPX: 0.5, controlPY: 0.9, endX: 0.9, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.3, startY: 0.7, controlPX: 0.3, controlPY: 0.7, endX: 0.5, endY: 0.9, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line7: {
-        startX: 0.1, startY: 0.5, controlPX: 0.1, controlPY: 0.5, endX: 0.5, endY: 0.1, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.5, startY: 0.1, controlPX: 0.5, controlPY: 0.1, endX: 0.7, endY: 0.3, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line8: {
-        startX: 0.1, startY: 0.5, controlPX: 0.1, controlPY: 0.5, endX: 0.5, endY: 0.9, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.5, startY: 0.5, controlPX: 0.5, controlPY: 0.5, endX: 0.7, endY: 0.3, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line9: {
-        startX: 0.3, startY: 0.3, controlPX: 0.3, controlPY: 0.3, endX: 0.7, endY: 0.7, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.5, startY: 0.5, controlPX: 0.5, controlPY: 0.5, endX: 0.7, endY: 0.7, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line10: {
-        startX: 0.3, startY: 0.7, controlPX: 0.3, controlPY: 0.7, endX: 0.7, endY: 0.3, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.5, startY: 0.9, controlPX: 0.5, controlPY: 0.9, endX: 0.7, endY: 0.7, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line11: {
-        startX: 0.5, startY: 0.1, controlPX: 0.5, controlPY: 0.1, endX: 0.9, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
+        startX: 0.5, startY: 0.3, controlPX: 0.5, controlPY: 0.1, endX: 0.9, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
       },
       line12: {
         startX: 0.5, startY: 0.9, controlPX: 0.5, controlPY: 0.9, endX: 0.9, endY: 0.5, active: false, startXF: true, startYF: true, controlPXF: true, controlPYF: true, endXF: true, endYF: true, activeF: true
@@ -539,7 +602,6 @@ class Automation {
       automation4: {
         name: "CLUSTER AUTOMATION", description: "Autobuys CLUSTER, when you have enough to buy, costs nothing", active: false, nameF: true, descriptionF: true
       },
-
       automation5: {
         name: "SOFTWARE AUTOMATION", description: "Autobuys SOFTWARE UPGRADES, when you have enough to buy", active: false, nameF: true, descriptionF: true
       }
@@ -553,31 +615,31 @@ class Screen {
 
     this.screens = options.screens || {
       A1: {
-        name: "Hardware 1", feature1: "", feature2: "", active: true, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Hardware 1", feature1: "", feature2: "", active: true, nameF: true, feature1F: true, feature2F: true
       },
       A2: {
-        name: "Software 1", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Software 1", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A3: {
-        name: "Hardware 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Hardware 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A4: {
-        name: "software 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "software 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A5: {
-        name: "Communication 1", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Communication 1", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A6: {
-        name: "Hardware 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Hardware 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A7: {
-        name: "Communication 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Communication 2", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A8: {
-        name: "Software 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Software 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
       A9: {
-        name: "Communication 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true, activeF: true
+        name: "Communication 3", feature1: "", feature2: "", active: false, nameF: true, feature1F: true, feature2F: true
       },
     }
 
@@ -633,6 +695,8 @@ function resetSave() {
   createSaveData()
   const stringifiedData = JSON.stringify(saveData);
   localStorage.setItem("HyperStructureSave", stringifiedData);
+
+  resetCanvas()
 }
 
 function deepMerge(obj1, obj2) {
@@ -678,6 +742,8 @@ function offExportSave() {
 }
 
 function importSave() {
+  IShowableClass.init = true;
+  resetSave()
   var encryptedData = document.getElementById("Save").value;
   const decryptedData = decryptData(encryptedData, secretKey);
   try {
@@ -690,6 +756,8 @@ function importSave() {
   } catch (e) {
     console.error("Errore nella decifratura o parsing dei dati: ", e);
   }
+  resetCanvas()
+  IShowableClass.init = true;
 
 }
 
@@ -952,7 +1020,9 @@ function visualHardware() {
     expansionValute = IExpansor.expansors.expansor1.effect
   }
 
-  update("hardware1Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "</div> <div>EXPANSORS</div> <div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>")
+  update("hardware1Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
+  update("hardware2Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
+  update("hardware3Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
 
   //expansors
 
@@ -960,248 +1030,19 @@ function visualHardware() {
 
     var selExp = IExpansor.expansors[x]
     //...............................
-    if (selExp.priceIdentity1 != "") {
-      var pId1 = selExp.priceIdentity1 + ":"
+    if (selExp.priceIdentity != "") {
+      var pId1 = selExp.priceIdentity + ":"
       var pId1P = format(selExp.price1)
     }
     else {
       var pId1 = ""
       var pId1P = ""
     }
-    //...............................
-    if (selExp.priceIdentity2 != "") {
-      var pId2 = selExp.priceIdentity2 + ":"
-      var pId2P = format(selExp.price2)
-    }
-    else {
-      var pId2 = ""
-      var pId2P = ""
-    }
-    //...............................
-    if (selExp.priceIdentity3 != "") {
-      var pId3 = selExp.priceIdentity3 + ":"
-      var pId3P = format(selExp.price3)
-    }
-    else {
-      var pId3 = ""
-      var pId3P = ""
-    }
-    //...............................
-    if (selExp.priceIdentity4 != "") {
-      var pId4 = selExp.priceIdentity4 + ":"
-      var pId4P = format(selExp.price4)
-    }
-    else {
-      var pId4 = ""
-      var pId4P = ""
-    }
-
 
     update(x + "Name", selExp.name)
     update(x + "Effect", selExp.description + " " + format(selExp.effect))
     update(x + "Level", "<div>" + selExp.level + "</div>" + "<hr />" + "<div>" + selExp.maxLevel + "</div>")
-    update(x + "Price", "<div>" + pId1 + pId1P + "</div>" +
-      "<div>" + pId2 + pId2P + "</div>" +
-      "<div>" + pId3 + pId3P + "</div>" +
-      "<div>" + pId4 + pId4P + "</div>"
-    )
-  }
-
-  var im = document.getElementById("expansorImagePlace").style
-  var sel = IExpansor.expansors
-  //expansorImage
-  switch (IExpansor.monumentImage) {
-    case 1:
-      im.backgroundImage = "url(images/unit1.png)"
-      if (sel.expansor1.level == 2) {
-        IExpansor.monumentImage = 2
-      }
-      break;
-
-    case 2:
-      im.backgroundImage = "url(images/unit2.png)"
-      if (sel.expansor1.level == 3) {
-        IExpansor.monumentImage = 3
-      }
-      break;
-
-    case 3:
-      im.backgroundImage = 'url(images/unit3.png)'
-      if (sel.expansor1.level == 4) {
-        IExpansor.monumentImage = 4
-      }
-      break;
-
-    case 4:
-      im.backgroundImage = 'url(images/unit4.png)'
-      if (sel.expansor1.level == 5) {
-        IExpansor.monumentImage = 5
-      }
-      break;
-
-    case 5:
-      im.backgroundImage = 'url(images/unit5.png)'
-      if (sel.expansor1.level == 6) {
-        IExpansor.monumentImage = 6
-      }
-      break;
-
-    case 6:
-      im.backgroundImage = 'url(images/unit6.png)'
-      if (sel.expansor1.level == 7) {
-        IExpansor.monumentImage = 7
-      }
-      break;
-
-    case 7:
-      im.backgroundImage = 'url(images/unit7.png)'
-      if (sel.expansor2.level == 1) {
-        IExpansor.monumentImage = 8
-      }
-      break;
-
-    case 8:
-      im.backgroundImage = 'url(images/block1.png)'
-      if (sel.expansor2.level == 2) {
-        IExpansor.monumentImage = 9
-      }
-      break;
-
-    case 9:
-      im.backgroundImage = 'url(images/block2.png)'
-      if (sel.expansor2.level == 3) {
-        IExpansor.monumentImage = 10
-      }
-      break;
-
-    case 10:
-      im.backgroundImage = 'url(images/block3.png)'
-      if (sel.expansor2.level == 4) {
-        IExpansor.monumentImage = 11
-      }
-      break;
-
-    case 11:
-      im.backgroundImage = 'url(images/block4.png)'
-      if (sel.expansor2.level == 5) {
-        IExpansor.monumentImage = 12
-      }
-      break;
-
-    case 12:
-      im.backgroundImage = 'url(images/block5.png)'
-      if (sel.expansor2.level == 6) {
-        IExpansor.monumentImage = 13
-      }
-      break;
-
-    case 13:
-      im.backgroundImage = 'url(images/block6.png)'
-      if (sel.expansor2.level == 7) {
-        IExpansor.monumentImage = 14
-      }
-      break;
-
-    case 14:
-      im.backgroundImage = 'url(images/block7.png)'
-      if (sel.expansor3.level == 1) {
-        IExpansor.monumentImage = 15
-      }
-      break;
-
-    case 15:
-      im.backgroundImage = 'url(images/sector1.png)'
-      if (sel.expansor3.level == 2) {
-        IExpansor.monumentImage = 16
-      }
-      break;
-
-    case 16:
-      im.backgroundImage = 'url(images/sector2.png)'
-      if (sel.expansor3.level == 3) {
-        IExpansor.monumentImage = 17
-      }
-      break;
-
-    case 17:
-      im.backgroundImage = 'url(images/sector3.png)'
-      if (sel.expansor3.level == 4) {
-        IExpansor.monumentImage = 18
-      }
-      break;
-
-    case 18:
-      im.backgroundImage = 'url(images/sector4.png)'
-      if (sel.expansor3.level == 5) {
-        IExpansor.monumentImage = 19
-      }
-      break;
-
-    case 19:
-      im.backgroundImage = 'url(images/sector5.png)'
-      if (sel.expansor3.level == 6) {
-        IExpansor.monumentImage = 20
-      }
-      break;
-
-    case 20:
-      im.backgroundImage = 'url(images/sector6.png)'
-      if (sel.expansor3.level == 7) {
-        IExpansor.monumentImage = 21
-      }
-      break;
-
-    case 21:
-      im.backgroundImage = 'url(images/sector7.png)'
-      if (sel.expansor4.level == 2) {
-        IExpansor.monumentImage = 22
-      }
-      break;
-
-    case 22:
-      im.backgroundImage = 'url(images/cluster1.png)'
-      if (sel.expansor4.level == 2) {
-        IExpansor.monumentImage = 23
-      }
-      break;
-
-    case 23:
-      im.backgroundImage = 'url(images/cluster2.png)'
-      if (sel.expansor4.level == 3) {
-        IExpansor.monumentImage = 24
-      }
-      break;
-
-    case 24:
-      im.backgroundImage = 'url(images/cluster3.png)'
-      if (sel.expansor4.level == 4) {
-        IExpansor.monumentImage = 25
-      }
-      break;
-
-    case 25:
-      im.backgroundImage = 'url(images/cluster4.png)'
-      if (sel.expansor4.level == 5) {
-        IExpansor.monumentImage = 26
-      }
-      break;
-
-    case 26:
-      im.backgroundImage = 'url(images/cluster5.png)'
-      if (sel.expansor4.level == 6) {
-        IExpansor.monumentImage = 27
-      }
-      break;
-
-    case 27:
-      im.backgroundImage = 'url(images/cluster6.png)'
-      if (sel.expansor4.level == 7) {
-        IExpansor.monumentImage = 28
-      }
-      break;
-
-    case 28:
-      im.backgroundImage = 'url(images/cluster7.png)'
+    update(x + "Price", "<div>PRICE</div><div>" + pId1 + pId1P + "</div>")
   }
 
   //expansorUpgrades
@@ -1212,7 +1053,7 @@ function visualHardware() {
     update(x, "<div>" + selExp.description + "</div>" + "<div>" + format(selExp.effect) + "</div>")
 
     if (selExp.active) {
-      document.getElementById(x).style.background = "#174d00"
+      document.getElementById(x).style.background = "#004526"
     }
     else {
       document.getElementById(x).style.background = ""
@@ -1221,8 +1062,6 @@ function visualHardware() {
   }
 
   //monuments
-
-  checkShow("assimilatedValute")
 
   if (checkShow("cellsValute")) {
     var valute1 = "CELLS/S"
@@ -1244,35 +1083,83 @@ function visualHardware() {
   }
   else { var valute4 = "" }
 
-  updateClass("baseMonuments", `<div>NAME</div><div>${valute1}</div><div>${valute2}</div><div>${valute3}</div><div>${valute4}</div><div>UNLOCKS</div>`)
-
-
   for (let x in IExpansor.monuments) {
     var selExp = IExpansor.monuments[x];
     var ItMonumentsGrid
 
+    if (sec(IGameData.cellsProd) >= selExp.req1 || selExp.active) {
+      var re1B = "#004526"
+    }
+    else { var re1B = "#8d2424" }
+    if (sec(IGameData.assimilatedProd) >= selExp.req2 || selExp.active) {
+      var re2B = "#004526"
+    }
+    else { var re2B = "#8d2424" }
+    if (sec(IGameData.energyProd) >= selExp.req3 || selExp.active) {
+      var re3B = "#004526"
+    }
+    else { var re3B = "#8d2424" }
+    if (sec(IGameData.potentialProd) >= selExp.req4 || selExp.active) {
+      var re4B = "#004526"
+    }
+    else { var re4B = "#8d2424" }
+
+    if (checkShow("cellsValute")) {
+      var div1 = `<div style='background-color:${re1B}'>CELLS/S: ${format(selExp.req1)}</div>`
+    }
+    else {
+      div1 = "<div>-</div>"
+    }
+    if (checkShow("assimilatedValute")) {
+      var div2 = `<div style='background-color:${re2B}'>POPULATION/S: ${format(selExp.req2)}</div>`
+    }
+    else {
+      div2 = "<div>-</div>"
+    }
+
+    if (checkShow("energyValute")) {
+      var div3 = `<div style='background-color:${re3B}'>ENERGY/S: ${format(selExp.req3)}</div>`
+    }
+    else {
+      div3 = "<div>-</div>"
+    }
+
+    if (checkShow("potentialValute")) {
+      var div4 = `<div style='background-color:${re4B}'>POTENTIAL/S: ${format(selExp.req4)}</div>`
+    }
+    else {
+      div4 = "<div>-</div>"
+    }
+
     // Array con i valori da confrontare e i rispettivi colori
     if (!(selExp.active)) {
-      var requirements = [selExp.req1, selExp.req2, selExp.req3, selExp.req4];
-      var gameDataValues = [sec(IGameData.cellsProd), sec(IGameData.assimilatedProd), sec(IGameData.energyProd), sec(IGameData.potentialProd)];
-      var backgrounds = requirements.map((req, index) => gameDataValues[index] < req ? "#8d2424" : "#174d00");
 
-      ItMonumentsGrid = `<div>${selExp.name}</div>` +
-        requirements.map((req, i) => `<div style="background-color:${backgrounds[i]}">${format(req)}</div>`).join('') +
-        `<div>${selExp.unlocked}</div>`;
+      ItMonumentsGrid =
+        `<div class="monumentName">${selExp.name}</div>` +
+        div1 +
+        div2 +
+        div3 +
+        div4 +
+        `<div>UNLOCKS ${selExp.unlocked}</div>`
+
     } else {
       if (IExpansor.showMonuments) {
         unlockShow(x, true)
-        document.getElementById(x).style.backgroundColor = "#174d00"
+
         ItMonumentsGrid =
-          "<div style='background-color:" + "#174d00" + "'>" + selExp.name + "</div>" +
-          "<div style='background-color:" + "#174d00" + "'>" + format(selExp.req1) + "</div>" +
-          "<div style='background-color:" + "#174d00" + "'>" + format(selExp.req2) + "</div>" +
-          "<div style='background-color:" + "#174d00" + "'>" + format(selExp.req3) + "</div>" +
-          "<div style='background-color:" + "#174d00" + "'>" + format(selExp.req4) + "</div>" +
-          "<div style='background-color:" + "#174d00" + "'>" + selExp.unlocked + "</div>";
+          `<div class="monumentName">${selExp.name}</div>` +
+          div1 +
+          div2 +
+          div3 +
+          div4 +
+          `<div>UNLOCKS ${selExp.unlocked}</div>`
+      }
+
+      if (selExp.active) {
+        document.getElementById(x).style.backgroundColor = "#004526"
       }
       else {
+        document.getElementById(x).style.backgroundColor = "#313131"
         unlockShow(x, false)
       }
     }
@@ -1286,7 +1173,8 @@ function visualHardware() {
 function visualSoftware() {
   //softwareInfo
 
-  updateClass("softwareUpgradesInfo", `<div>POPILATION: ${format(IGameData.assimilated)}/${format(IGameData.maxAssimilated)}</div><div> POPULATION UPGRADES </div>`)
+  update("softwareUpgradesInfo", `<div>POPULATION: ${format(IGameData.assimilated)}/${format(IGameData.maxAssimilated)}</div><div> POPULATION UPGRADES </div>`)
+  update("softwareUpgradesInfo2", `<div>POPULATION: ${format(IGameData.assimilated)}/${format(IGameData.maxAssimilated)}</div><div> POPULATION UPGRADES </div>`)
 
   //software upgrades
 
@@ -1294,16 +1182,22 @@ function visualSoftware() {
 
     var sel = ISoftware.upgrades[x]
 
+    if (sel.priceIdentity == "assimilated") {
+      var PriceIdentity = "POPULATION"
+    }
+    else { PriceIdentity = sel.priceIdentity }
+
     update(x, "<div>" + sel.name + " " + format(sel.effect) +
       "</div><div>" + sel.level + " / " + sel.maxLevel +
-      "</div><div>" + sel.priceIdentity + ": " + format(sel.price) + "</div>")
+      "</div><div>" + PriceIdentity + ": " + format(sel.price) + "</div>")
 
   }
 
   //softwareUpgradesAssimilate
   //assimilationCenter
 
-  updateClass("assimilationCenterInfo", `<div> SELECTED: ${ISelUpgrade.group.group2.num} / ${ISelUpgrade.group.group2.maxNum} </div><div> POPULATION CENTER </div>`)
+  update("software1assimilationCenterInfo", `<div> SELECTED: ${ISelUpgrade.group.group2.num} / ${ISelUpgrade.group.group2.maxNum} </div><div> POPULATION CENTER </div>`)
+  update("software2assimilationCenterInfo", `<div> SELECTED: ${ISelUpgrade.group.group5.num} / ${ISelUpgrade.group.group5.maxNum} </div><div> POPULATION CENTER </div>`)
 
   for (let x in ISoftware.assimilationCenter) {
 
@@ -1316,7 +1210,7 @@ function visualSoftware() {
       document.getElementById("assimilationBaseGrid" + x).style.background = ""
     }
 
-    updateClass("assimilationBaseGrid" + x, `<div> ${sel.description} </div>
+    update("assimilationBaseGrid" + x, `<div> ${sel.description} </div>
                                           <div> ${format(sel.effect)}</div>`)
 
   }
@@ -1331,9 +1225,11 @@ function visualCommunication() {
 
     var sel = IEnergy.energyUpgrades[x]
 
+
+
     update(x, `<div>${sel.level}/${sel.maxLevel}</div><div> ${sel.name} </div>
       <div> ${format(sel.effect)}</div>
-      <div>${sel.priceIdentity}: ${format(sel.price)}</div>`)
+      <div>${sel.priceIdentity.toUpperCase()}: ${format(sel.price)}</div>`)
   }
 
 }
@@ -1389,6 +1285,12 @@ function automationActuator() {
   if (IAutomation.automators.automation2.active) {
     if (IExpansor.expansors.expansor2.level < IExpansor.expansors.expansor2.maxLevel) {
       upgradeExpansor("expansor2")
+    }
+  }
+
+  if (IAutomation.automators.automation3.active) {
+    if (IExpansor.expansors.expansor3.level < IExpansor.expansors.expansor3.maxLevel) {
+      upgradeExpansor("expansor3")
     }
   }
 
@@ -1462,14 +1364,14 @@ function valuesSetter() {
 
   //tickSpeed
   var tickSpeed2 = IGameData.tickSpeedMult;
-  /*
+  
   if (ISoftware.assimilationCenter.button6.active) {
     var tickSpeed3 = ISoftware.assimilationCenter.button6.effect
   }
   else { tickSpeed3 = 1 }
-  */
+  
 
-  IGameData.tickSpeedProd = 1 * tickSpeed2// * tickSpeed3
+  IGameData.tickSpeedProd = 1 * tickSpeed2 * tickSpeed3
   IGameData.tickSpeed = IGameData.tickSpeedProd
 
   //components
@@ -1482,66 +1384,99 @@ function valuesSetter() {
   }
   else { componentEf1 = 1 }
   */
-
-  var componentEf2 = IEnergy.energyUpgrades.energyButton3.effect
-
   var softUpgrade3 = ISoftware.upgrades.softUpgrade3.effect
 
   if (IComponents.components.token5.active) {
     var compToken5 = IComponents.components.token5.effect1
   }
-  else { compToken5 = 1 }
+  else { compToken5 = 0 }
+
+  if(IEnergy.energyUpgrades.energyButton3.level > 0){
+    var energy3 = IEnergy.energyUpgrades.energyButton3.effect
+  }
+  else{
+    energy3 = 0
+  }
 
 
   var token1 = IComponents.components.token1
 
   token1.level = token1.level;
   token1.maxLevel = 100;
-  token1.effect1 = Math.pow(token1.level, 1.2)/* * componentEf1*/ * compToken5; //1.2
+  token1.effect1 = Math.pow(token1.level + compToken5, 1.2)/* * componentEf1*/; //1.2
   token1.price = Math.pow(2, token1.level) / softUpgrade3;
 
   var token2 = IComponents.components.token2
 
   token2.level = token2.level;
   token2.maxLevel = 10;
-  token2.effect1 = (token2.level * 0.5 + 1)/* * componentEf1*/ * compToken5;
+  token2.effect1 = ((token2.level + compToken5) * 0.5 + 1)/* * componentEf1*/;
+  token2.description = `<div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^</div>`
   token2.price = Math.pow(100, 1.5 + token2.level) / softUpgrade3;
 
   var token3 = IComponents.components.token3
 
   token3.level = token3.level;
   token3.maxLevel = 100;
-  token3.effect1 = (token3.level * 0.2 + 1)/* * componentEf1*/ * compToken5;
-  token3.price = (Math.pow(10, 21) * (Math.pow(1.35, token3.level))) / softUpgrade3;
+  token3.effect1 = ((token3.level + compToken5) * 0.2 + 1)/* * componentEf1*/;
+  token3.price = (Math.pow(10, 15.5) * (Math.pow(1.35, token3.level))) / softUpgrade3;
 
   var token4 = IComponents.components.token4
 
   token4.level = token4.level;
   token4.maxLevel = 5;
-  token4.effect1 = Math.pow(10, token4.level)/* * componentEf1*/ * compToken5;
+  token4.effect1 = Math.pow(10, token4.level + compToken5)/* * componentEf1*/;
   token4.price = (Math.pow(10, 24) * Math.pow(1000, token4.level)) / softUpgrade3;
 
   var token5 = IComponents.components.token5
 
   token5.level = token5.level;
-  token5.maxLevel = 10;
-  token5.effect1 = (token5.level * 2)/* * componentEf1*/;
-  token5.price = (Math.pow(10, 33) * Math.pow(1000, token5.level)) / softUpgrade3;
+  token5.maxLevel = 3;
+  token5.effect1 = token5.level/* * componentEf1*/;
+  token5.price = (Math.pow(10, 33) * Math.pow((10 ** 7), token5.level)) / softUpgrade3;
 
   var token6 = IComponents.components.token6
 
   token6.level = token6.level;
   token6.maxLevel = 5;
-  token6.effect1 = Math.pow(10, token6.level)/* * componentEf1*/ * compToken5;
-  token6.price = (Math.pow(10, 35) * Math.pow(500, token6.level)) / softUpgrade3;
+  token6.effect1 = Math.pow(10, token6.level)/* * componentEf1*/;
+  token6.price = (Math.pow(10, 35) * Math.pow((10 ** 5), token6.level)) / softUpgrade3;
 
   var token7 = IComponents.components.token7
 
   token7.level = token7.level;
   token7.maxLevel = 5;
-  token7.effect1 = 0.1 * token7.level * compToken5;
+  token7.effect1 = 0.1 * token7.level;
   token7.price = (Math.pow(10, 50) * Math.pow(Math.pow(10, 10), token7.level)) / softUpgrade3;
 
+  var token8 = IComponents.components.token8
+
+  token8.level = token8.level;
+  token8.maxLevel = 1;
+  token8.effect1 = Math.pow(token1.level + energy3 + compToken5, 1.7)/* * componentEf1*/; //1.2
+  token8.price = 0;
+
+  var token9 = IComponents.components.token9
+
+  token9.level = token9.level;
+  token9.maxLevel = 1;
+  token9.description = `ENERGY/S is reduced by 50% compound, <div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^</div>`
+  token9.effect1 = ((token2.level + energy3 + compToken5) * 0.5 + 1.5)/* * componentEf1*/;
+  token9.price = 0;
+
+  var token10 = IComponents.components.token10
+
+  token10.level = token10.level;
+  token10.maxLevel = 1;
+  token10.effect1 = ((token3.level + energy3 + compToken5) * 1 + 1)/* * componentEf1*/;
+  token10.price = 0
+
+  var token11 = IComponents.components.token11
+
+  token11.level = token11.level;
+  token11.maxLevel = 1;
+  token11.effect1 = Math.pow(13, token4.level + energy3 + compToken5)/* * componentEf1*/;
+  token11.price = 0
 
 
   //expansor
@@ -1556,41 +1491,42 @@ function valuesSetter() {
   }
   else { selExpansor2 = 1 }
 
-  if (IExpansor.expansors.expansor3.level > 0) {
-    var expan3 = IExpansor.expansors.expansor3.effect
-  }
-  else { expan3 = 1 }
-
   var selExp = IExpansor.expansors.expansor1
 
   if (IExpansor.expansors.expansor2.level > 0) {
-    var expansor2Level = IExpansor.expansors.expansor2.level
+    var expansor2Level = IExpansor.expansors.expansor2.effect
   }
-  else { expansor2Level = 1 }
+  else { expansor2Level = 0 }
+
+  if (IExpansor.expansors.expansor3.level > 0) {
+    var expansor3Level = IExpansor.expansors.expansor3.effect
+  }
+  else { expansor3Level = 0 }
+
+
+  if (IExpansor.expansors.expansor3.level > 0) {
+    var expansor3_3U2 = IExpansor.expansorsUpgrades.expansor3U2.effect
+  }
+  else { expansor3_3U2 = 1 }
 
   selExp.level = selExp.level;
-  selExp.maxLevel = 49 * expansor2Level;
-  console.log(selExp.maxLevel)
+  selExp.maxLevel = 49 + expansor2Level;
   selExp.effect = Math.pow(selExp.level, 2) * selExpansor1
-
-  selExp.price1 = 100 * (1 + Math.pow(1.2, selExp.level)) / (selExpansor2 * expan3);
+  selExp.price1 = 100 * (1 + Math.pow(1.30, selExp.level)) / (selExpansor2 * expansor3_3U2);
 
   selExp = IExpansor.expansors.expansor2
 
   selExp.level = selExp.level;
-  selExp.maxLevel = 49;
+  selExp.maxLevel = 49 + expansor3Level;
   selExp.effect = 7 * selExp.level;
-  selExp.price1 = (10 ** 7) * (1 + Math.pow(selExp.level, 13));
-  selExp.price2 = (100) * (1 + Math.pow(selExp.level, 2.5));
+  selExp.price1 = (100) * (1 + Math.pow(selExp.level, 2.5));
 
   selExp = IExpansor.expansors.expansor3
 
   selExp.level = selExp.level;
-  selExp.maxLevel = Math.round(IExpansor.expansors.expansor2.level / 7);
-  selExp.effect = 1 + Math.pow(2, selExp.level);
-  selExp.price1 = (10 ** 6) * (1 + Math.pow(selExp.level, 13));
-  selExp.price2 = (100) * (1 + Math.pow(selExp.level, 2.5));
-  selExp.price2 = (100) * (1 + Math.pow(selExp.level, 1.5));
+  selExp.maxLevel = 49;
+  selExp.effect = 7 * selExp.level;
+  selExp.price1 = (10 ** 4) * (1 + Math.pow(selExp.level, 6));
 
 
   //expansor upgrades
@@ -1608,13 +1544,23 @@ function valuesSetter() {
   //2U1
   var sel = IExpansor.expansorsUpgrades.expansor2U1
 
-  sel.effect = Math.pow(1.6, IExpansor.expansors.expansor3.level)
+  sel.effect = Math.pow(IExpansor.expansors.expansor2.level, 4)
 
 
   //2U2
   var sel = IExpansor.expansorsUpgrades.expansor2U2
 
-  sel.effect = Math.pow(1.75, IExpansor.expansors.expansor3.level)
+  sel.effect = Math.pow(1.75, IExpansor.expansors.expansor2.level)
+
+  //3U1
+  var sel = IExpansor.expansorsUpgrades.expansor3U1
+
+  sel.effect = Math.pow(1.1, IExpansor.expansors.expansor3.level)
+
+  //3U2
+  var sel = IExpansor.expansorsUpgrades.expansor3U2
+
+  sel.effect = Math.pow(100, IExpansor.expansors.expansor3.level)
 
   //monuments
 
@@ -1655,39 +1601,115 @@ function valuesSetter() {
 
   var selMon = IExpansor.monuments.monument6
 
-  selMon.req1 = (1 * 10 ** 6);
+  selMon.req1 = (1 * 10 ** 7);
   selMon.req2 = 8;
   selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument7
 
-  selMon.req1 = (1 * 10 ** 28);
-  selMon.req2 = (1 * 10 ** 8);
-  selMon.req3 = (10 ** 4);
+  selMon.req1 = (2 * 10 ** 11);
+  selMon.req2 = 250;
+  selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument8
 
-  selMon.req1 = (1 * 10 ** 26);
-  selMon.req2 = (1 * 10 ** 10);
-  selMon.req3 = (10 ** 4);
+  selMon.req1 = (1 * 10 ** 13);
+  selMon.req2 = (500);
+  selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument9
 
-  selMon.req1 = (1 * 10 ** 6);
-  selMon.req2 = 8;
+  selMon.req1 = (1 * 10 ** 20);
+  selMon.req2 = (10 ** 4);
   selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument10
 
-  selMon.req1 = (1 * 10 ** 6);
+  selMon.req1 = (1 * 10 ** 25);
+  selMon.req2 = (10 ** 10);
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument11
+
+  selMon.req1 = (1 * 10 ** 7);
   selMon.req2 = 8;
   selMon.req3 = 0;
   selMon.req4 = 0;
 
+  var selMon = IExpansor.monuments.monument12
+
+  selMon.req1 = (1 * 10 ** 16);
+  selMon.req2 = (10 ** 3);
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument13
+
+  selMon.req1 = (1 * 10 ** 20);
+  selMon.req2 = 10 ** 5;
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument14
+
+  selMon.req1 = (1 * 10 ** 27);
+  selMon.req2 = 0
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument15
+
+  selMon.req1 = 0
+  selMon.req2 = 10 ** 12;
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument16
+
+  selMon.req1 = 0
+  selMon.req2 = 0
+  selMon.req3 = (6 * 10 ** 3);
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument17
+
+  selMon.req1 = (1 * 10 ** 33)
+  selMon.req2 = 0
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument18
+
+  selMon.req1 = (1 * 10 ** 40)
+  selMon.req2 = 0
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument19
+
+  selMon.req1 = (1 * 10 ** 45)
+  selMon.req2 = 0
+  selMon.req3 = 0;
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument20
+
+  selMon.req1 = (1 * 10 ** 60)
+  selMon.req2 = (1 * 10 ** 15)
+  selMon.req3 = (1 * 10 ** 15);
+  selMon.req4 = 0;
+
+  var selMon = IExpansor.monuments.monument21
+
+  selMon.req1 = 0
+  selMon.req2 = (1 * 10 ** 15)
+  selMon.req3 = 0
+  selMon.req4 = 0;
   //Software
 
   //softUpgrades
@@ -1720,114 +1742,106 @@ function valuesSetter() {
   sel.effect = sel.level
   sel.price = 10 * Math.pow(1000, 1 + sel.level)
 
-  /*
+  
   var sel = ISoftware.upgrades.softUpgrade5
 
   sel.level = sel.level;
-  sel.maxLevel = 10;
-  sel.effect = Math.pow(10, sel.level)
-  sel.price = Math.pow(10, 5) * Math.pow(1000, 1 + sel.level)
+  sel.maxLevel = 5;
+  sel.effect = Math.pow(100, sel.level)
+  sel.price = Math.pow(10, 8) * Math.pow(10 ** 4, 1 + sel.level)
 
   var sel = ISoftware.upgrades.softUpgrade6
 
   sel.level = sel.level;
   sel.maxLevel = 3;
-  sel.effect = sel.level * (ISoftware.currentTier)
-  sel.price = Math.pow(10, 5) * Math.pow(10000, 1 + sel.level)
+  sel.effect = Math.pow(1000, sel.level)
+  sel.price = Math.pow(10, 9) * Math.pow(10 ** 4, 1 + sel.level)
 
   var sel = ISoftware.upgrades.softUpgrade7
 
   sel.level = sel.level;
-  sel.maxLevel = 10;
-  sel.effect = Math.pow(3, sel.level)
-  sel.price = Math.pow(10, 5) * Math.pow(10000, 1 + sel.level)
-
-  var sel = ISoftware.upgrades.softUpgrade8
-
-  sel.level = sel.level;
-  sel.maxLevel = 3;
+  sel.maxLevel = 2;
   sel.effect = sel.level
-  sel.price = Math.pow(10, 5) * Math.pow(1000, 1 + sel.level)
-*/
+  sel.price = Math.pow(10, 14) * Math.pow(10 ** 6, 1 + sel.level)
+
 
   var group = ISelUpgrade.group.group2
-  var groupMaxNum1 = ISoftware.upgrades.softUpgrade4.effect
-  
+  var groupMaxNum = ISoftware.upgrades.softUpgrade4.effect
+  group.maxNum = 1 + groupMaxNum
+
+  var group = ISelUpgrade.group.group5
+  var groupMaxNum = ISoftware.upgrades.softUpgrade7.effect
+  group.maxNum = 1 + groupMaxNum
+
   /*
   var groupMaxNum2 = ISoftware.upgrades.softUpgrade8.effect
 */
 
-  group.maxNum = 1 + groupMaxNum1
-
   //assimilationCenter
-/*
-  if (ISoftware.upgrades.softUpgrade6.level > 0) {
-    var softUp6 = ISoftware.upgrades.softUpgrade6.effect
-  }
-  else { softUp6 = 1 }
 
-  if (ISoftware.assimilationCenter.button7.active) {
-    var buttonEf7 = ISoftware.assimilationCenter.button7.effect
-  }
-  else { buttonEf7 = 1 }
-  
+    if (ISoftware.upgrades.softUpgrade6.level > 0) {
+      var softUp6 = ISoftware.upgrades.softUpgrade6.effect
+    }
+    else { softUp6 = 1 }
 
   //MAX ASSIMILATED X: 
   var sel = ISoftware.assimilationCenter.button1
 
-  sel.effect = 10 * (softUp6 * buttonEf7)
+  sel.effect = 10
 
   //boost CELLS/S by:
 
   var sel = ISoftware.assimilationCenter.button2
 
-  sel.effect = 10 * (softUp6 * buttonEf7)
+  sel.effect = 10
 
   //boost ASSIMILATION/S by:  
 
   var sel = ISoftware.assimilationCenter.button3
 
-  sel.effect = 4 * (softUp6 * buttonEf7)
+  sel.effect = 4
 
-  //MAX ASSIMILATED boosts ASSIMILATED/S:
+  //ASSIMILATED boosts ASSIMILATED/S:
 
+  
   var sel = ISoftware.assimilationCenter.button4
-
-  sel.effect = Math.log(IGameData.maxAssimilated) * (softUp6 * buttonEf7)
-
-  /*
+ 
+  sel.effect = Math.log(IGameData.assimilated)
+ 
+  
   //boost ENERGY/S by:
-
+ 
   var sel = ISoftware.assimilationCenter.button5
-
-  sel.effect = 5 * (softUp6 * buttonEf7)
-
+ 
+  sel.effect = 5
+ 
   //boost TICKSPEED by: 
-
+ 
   var sel = ISoftware.assimilationCenter.button6
-
-  sel.effect = 2 * (softUp6 * buttonEf7)
-
+ 
+  sel.effect = 2
+ 
+  /*
   //TIER boost is doubled: 
-
+ 
   var sel = ISoftware.assimilationCenter.button7
-
+ 
   sel.effect = 2 * softUp6
-
+ 
   //ancora da implementare
   //boost POTENTIAL/S by: 
-
+ 
   var sel = ISoftware.assimilationCenter.button8
-
+ 
   sel.effect = 2 * (softUp6 * buttonEf7)
-
+ 
   //TIER 1 COMPONENTS are stronger
-
+ 
   var sel = ISoftware.assimilationCenter.button9
-
+ 
   sel.effect = 1.1 * (softUp6 * buttonEf7)
+ */
 
-*/
   //ENERGY
 
   //total level
@@ -1840,62 +1854,70 @@ function valuesSetter() {
 
   var totalLevel = sel1 + sel2 + sel3 + sel4 + sel5 + sel6
 
-/*
-  var Button2Ef = IEnergy.energyUpgrades.energyButton2.effect
+  var adjuster = Math.floor(totalLevel / 3);
+  var adjuster2 = Math.floor(adjuster / 2);
 
-  if (ISoftware.upgrades.softUpgrade7.level > 0) {
-    var softUp7 = ISoftware.upgrades.softUpgrade7.effect
+  totalLevel = sel1 + sel2 + sel3 + sel4 + sel5 + sel6 + adjuster + adjuster2
+
+  if (IEnergy.energyUpgrades.energyButton2.level > 0) {
+    var Button2Ef = IEnergy.energyUpgrades.energyButton2.effect
+  }
+  else { Button2Ef = 1 }
+
+
+  if (ISoftware.upgrades.softUpgrade6.level > 0) {
+    var softUp7 = ISoftware.upgrades.softUpgrade6.effect
   }
   else { softUp7 = 1 }
-  */
+  
 
   //ENERGY/S
   var sel = IEnergy.energyUpgrades.energyButton1
 
   sel.level = sel.level
   sel.maxLevel = 5
-  sel.effect = Math.pow(Math.log(2 + IGameData.energy), sel.level)/* * Button2Ef*/
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.effect = Math.pow(Math.log(2 + IGameData.energy), sel.level) * Button2Ef
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
-  //All ENERGY UPGRADES X: 
+  //some ENERGY UPGRADES X: 
   var sel = IEnergy.energyUpgrades.energyButton2
 
   sel.level = sel.level
   sel.maxLevel = 5
   sel.effect = Math.pow(1.5, sel.level)
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
-  //All ENERGY COMPONENTS X (devo ancora fare i componenti)
+  //All ENERGY COMPONENTS are STRONGER
   var sel = IEnergy.energyUpgrades.energyButton3
 
   sel.level = sel.level
-  sel.maxLevel = 5
-  sel.effect = Math.pow(2, sel.level)/* * Button2Ef*/
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.maxLevel = 3
+  sel.effect = sel.level
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
   //ENERGY boosts all VALUTES X: 
   var sel = IEnergy.energyUpgrades.energyButton4
 
   sel.level = sel.level
   sel.maxLevel = 5
-  sel.effect = Math.pow(Math.log(IGameData.energy), sel.level)/* * Button2Ef*/
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.effect = Math.pow(Math.log(3 + IGameData.energy), sel.level) * Button2Ef
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
   //OVERCLOCK effect X: 
   var sel = IEnergy.energyUpgrades.energyButton5
 
   sel.level = sel.level
   sel.maxLevel = 5
-  sel.effect = Math.pow(Math.log(IGameData.energy), sel.level)/* * Button2Ef*/
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.effect = Math.pow(Math.log(IGameData.energy), sel.level) * Button2Ef
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
   //OVERCLOCK quantity: 
   var sel = IEnergy.energyUpgrades.energyButton6
 
   sel.level = sel.level
   sel.maxLevel = 5
-  sel.effect = Math.pow(Math.log(IGameData.energy), sel.level)/* * Button2Ef*/
-  sel.price = (Math.pow(10, totalLevel) * Math.pow(10, 26) * Math.pow(1000, sel.level))/* / softUp7*/
+  sel.effect = Math.pow(Math.log(IGameData.energy), sel.level) * Button2Ef
+  sel.price = (Math.pow(100, totalLevel) * Math.pow(10, 21)) / softUp7
 
 }
 
@@ -1913,7 +1935,6 @@ function valuesSetterDinamic() {
     var cells2 = IGameData.tickSpeed
   }
   else { cells2 = 1 }
-
 
   if (IGameData.expansion > 0) {
     var cells3 = IGameData.expansion
@@ -1935,7 +1956,24 @@ function valuesSetterDinamic() {
   }
   else { cells7 = 1 }
 
-  IGameData.cellsProd = ((cells1 + cells6) * cells3 * cells4 * cells7) * cells2 * global1
+  if (IComponents.components.token8.active) {
+    var cells8 = IComponents.components.token8.effect1
+  }
+  else { cells8 = 1 }
+
+  if (IComponents.components.token10.active) {
+    var cells9 = IComponents.components.token10.effect1
+  }
+  else { cells9 = 1 }
+
+  if (IComponents.components.token4.active ||
+    IComponents.components.token11.active
+  ) {
+    var cells10 = 0.1
+  }
+  else { cells10 = 1 }
+
+  IGameData.cellsProd = ((cells1 + cells6 + cells8) * cells3 * cells4 * cells7 * cells9 * cells10) * cells2 * global1
 
   IGameData.cells += IGameData.cellsProd
 
@@ -1943,7 +1981,6 @@ function valuesSetterDinamic() {
 
   var expansion1 = IExpansor.expansors.expansor1.effect
   var expansion2 = IGameData.tickSpeed
-  var expansion3 = IExpansor.expansors.expansor2.effect
 
   if (IComponents.components.token2.active) {
     var expansion4 = IComponents.components.token2.effect1
@@ -1955,7 +1992,17 @@ function valuesSetterDinamic() {
   }
   else { expansion5 = 1 }
 
-  IGameData.expansionProd += ((expansion1 * expansion3 * expansion5) ** expansion4) * expansion2 * global1
+  if (IComponents.components.token9.active) {
+    var expansion6 = IComponents.components.token9.effect1
+  }
+  else { expansion6 = 1 }
+
+  if (IComponents.components.token10.active) {
+    var expansion7 = IComponents.components.token10.effect1
+  }
+  else { expansion7 = 1 }
+
+  IGameData.expansionProd += ((expansion1 * expansion5 * expansion7) ** (expansion4 * expansion6)) * expansion2 * global1
   IGameData.expansion = Math.pow(1.5, Math.log(IGameData.expansionProd))
 
 
@@ -1975,25 +2022,35 @@ function valuesSetterDinamic() {
 
   var assimilation4 = IGameData.tickSpeed
 
-  /*
+  
   if (ISoftware.assimilationCenter.button4.active) {
     var assimilated5 = ISoftware.assimilationCenter.button4.effect
   }
   else { assimilated5 = 1 }
-*/
+
 
   if (ISoftware.assimilationCenter.button3.active) {
     var assimilated6 = ISoftware.assimilationCenter.button3.effect
   }
   else { assimilated6 = 1 }
 
-  if (checkShow("softwareTab")) {
+  if (IComponents.components.token10.active) {
+    var assimilated7 = IComponents.components.token10.effect1
+  }
+  else { assimilated7 = 1 }
+
+  if (IComponents.components.token11.active) {
+    var assimilated8 = IComponents.components.token11.effect1
+  }
+  else { assimilated8 = 1 }
+
+  if (checkShow("A2")) {
     var initialAssimilated = 1
   } else {
     initialAssimilated = 0;
   }
 
-  IGameData.assimilatedProd = (initialAssimilated * assimilated1 * assimilated2 * assimilated3/* * assimilated5*/ * assimilated6) * assimilation4 * global1;
+  IGameData.assimilatedProd = (initialAssimilated * assimilated1 * assimilated2 * assimilated3 * assimilated5 * assimilated6 * assimilated7 * assimilated8) * assimilation4 * global1;
 
   if (IGameData.assimilated + IGameData.assimilatedProd > IGameData.maxAssimilated) {
     IGameData.assimilated = IGameData.maxAssimilated;
@@ -2023,7 +2080,12 @@ function valuesSetterDinamic() {
   }
   else { maxAssimilated4 = 1 }
 
-  IGameData.maxAssimilated = 15 * maxAssimilated1 * maxAssimilated2/* * maxAssimilated3*/ * maxAssimilated4
+  if (ISoftware.upgrades.softUpgrade5.level > 0) {
+    var maxAssimilated5 = ISoftware.upgrades.softUpgrade5.effect
+  }
+  else { maxAssimilated5 = 1 }
+
+  IGameData.maxAssimilated = 15 * maxAssimilated1 * maxAssimilated2/* * maxAssimilated3*/ * maxAssimilated4 * maxAssimilated5
 
   //energy
 
@@ -2034,19 +2096,51 @@ function valuesSetterDinamic() {
 
   var energy2 = IGameData.tickSpeedMult
 
-  /*
+  
   if (ISoftware.assimilationCenter.button5.active) {
     var energy3 = ISoftware.assimilationCenter.button5.effect
   }
   else { energy3 = 1 }
-  */
+  
 
   if (IComponents.components.token3.active) {
     var energy4 = IComponents.components.token3.effect1
   }
   else { energy4 = 1 }
 
-  IGameData.energyProd = (energy1/* * energy3*/ * energy4) * energy2;
+  if (IComponents.components.token10.active) {
+    var energy5 = IComponents.components.token10.effect1
+  }
+  else { energy5 = 1 }
+
+  if (IComponents.components.token6.active) {
+    var energy6 = IComponents.components.token6.effect1
+  }
+  else { energy6 = 1 }
+  
+  if (IExpansor.expansorsUpgrades.expansor3U1.active) {
+    var energy7 = IExpansor.expansorsUpgrades.expansor3U1.effect
+  }
+  else { energy7 = 1 }
+
+  var charged = 1
+  if (IComponents.components.token8.active) {
+    charged = charged - 0.5;
+  }
+  if (IComponents.components.token9.active) {
+    charged = charged - 0.5;
+  }
+  if (IComponents.components.token10.active) {
+    charged = charged - 0.5;
+  }
+  if (IComponents.components.token11.active) {
+    charged = charged - 0.5;
+  }
+  if (charged < 0) {
+    charged = 0;
+  }
+
+  IGameData.energyProd = (energy1 * energy3 * energy4 * energy5) * energy2 * energy6 * energy7 * charged;
   IGameData.energy += IGameData.energyProd
 }
 
@@ -2078,14 +2172,6 @@ document.getElementById("coreTab").onclick = function () {
 
 document.getElementById("hardwareTab").onclick = function () {
   changePage("selector", "hardware")
-}
-
-document.getElementById("softwareTab").onclick = function () {
-  changePage("selector", "software")
-}
-
-document.getElementById("communicationTab").onclick = function () {
-  changePage("selector", "communication")
 }
 
 document.getElementById("optionsTab").onclick = function () {
@@ -2167,26 +2253,34 @@ document.getElementById("loadoutName3").onmouseleave = function () {
 //Expansor
 
 document.getElementById("expansor1Button").onclick = function () {
+  let expansor = IExpansor.expansors.expansor1;
+
   if (IExpansor.expansors.expansor1.level < IExpansor.expansors.expansor1.maxLevel) {
-    upgradeExpansor("expansor1")
+    buy(expansor, 'level', expansor.priceIdentity, expansor.price1, 1);
   }
 }
 
 document.getElementById("expansor2Button").onclick = function () {
+  let expansor = IExpansor.expansors.expansor2;
+
   if (IExpansor.expansors.expansor2.level < IExpansor.expansors.expansor2.maxLevel) {
-    upgradeExpansor("expansor2")
+    buy(expansor, 'level', expansor.priceIdentity, expansor.price1, 1);
   }
 }
 
 document.getElementById("expansor3Button").onclick = function () {
+  let expansor = IExpansor.expansors.expansor3;
+
   if (IExpansor.expansors.expansor3.level < IExpansor.expansors.expansor3.maxLevel) {
-    upgradeExpansor("expansor3")
+    buy(expansor, 'level', expansor.priceIdentity, expansor.price1, 1);
   }
 }
 
 document.getElementById("expansor4Button").onclick = function () {
+  let expansor = IExpansor.expansors.expansor4;
+
   if (IExpansor.expansors.expansor4.level < IExpansor.expansors.expansor4.maxLevel) {
-    upgradeExpansor("expansor4")
+    buy(expansor, 'level', expansor.priceIdentity, expansor.price1, 1);
   }
 }
 
@@ -2196,16 +2290,7 @@ function upgradeExpansor(exp) {
 
   var ac = true;
 
-  if (!(valute.cells >= sel.price1)) {
-    ac = false
-  }
-  if (!(valute.assimilated >= sel.price2)) {
-    ac = false
-  }
-  if (!(valute.energy >= sel.price3)) {
-    ac = false
-  }
-  if (!(valute.potential >= sel.price4)) {
+  if (!(valute[sel.priceIdentity] >= sel.price1)) {
     ac = false
   }
 
@@ -2236,10 +2321,7 @@ function upgradeExpansor(exp) {
 
 
   if (ac) {
-    buy(sel, 'level', sel.priceIdentity1, sel.price1, 0)
-    buy(sel, 'level', sel.priceIdentity2, sel.price2, 0)
-    buy(sel, 'level', sel.priceIdentity3, sel.price3, 0)
-    buy(sel, 'level', sel.priceIdentity4, sel.price4, 0)
+    buy(sel, 'level', sel.priceIdentity, sel.price1, 0)
     sel.level += 1;
     valuesSetter()
   }
@@ -2261,14 +2343,12 @@ document.getElementById("expansor2U2").onclick = function () {
   assignGroup(IExpansor.expansorsUpgrades, "expansor2U2")
 }
 
+document.getElementById("expansor3U1").onclick = function () {
+  assignGroup(IExpansor.expansorsUpgrades, "expansor3U1")
+}
 
-document.getElementById("monumentsHider").onclick = function () {
-  if (IExpansor.showMonuments) {
-    IExpansor.showMonuments = false;
-  }
-  else {
-    IExpansor.showMonuments = true;
-  }
+document.getElementById("expansor3U2").onclick = function () {
+  assignGroup(IExpansor.expansorsUpgrades, "expansor3U2")
 }
 
 function assignGroup(obj, element) {
@@ -2328,9 +2408,31 @@ document.getElementById("softUpgrade4").onclick = function () {
   }
 }
 
+document.getElementById("softUpgrade5").onclick = function () {
+  let sel = ISoftware.upgrades.softUpgrade5
+  if (sel.level < sel.maxLevel) {
+    buy(sel, 'level', sel.priceIdentity, sel.price, 1)
+  }
+}
+
+document.getElementById("softUpgrade6").onclick = function () {
+  let sel = ISoftware.upgrades.softUpgrade6
+  if (sel.level < sel.maxLevel) {
+    buy(sel, 'level', sel.priceIdentity, sel.price, 1)
+  }
+}
+
+document.getElementById("softUpgrade7").onclick = function () {
+  let sel = ISoftware.upgrades.softUpgrade7
+  if (sel.level < sel.maxLevel) {
+    buy(sel, 'level', sel.priceIdentity, sel.price, 1)
+  }
+}
 //assimilationCenter
 
 document.getElementById("assimilationBaseGridbutton1").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button1")
+  /*
   var g = ISelUpgrade.group.group2;
 
   if (ISoftware.assimilationCenter.button1.active) {
@@ -2341,9 +2443,12 @@ document.getElementById("assimilationBaseGridbutton1").onclick = function () {
     if (!(ISoftware.assimilationCenter.button1.active) && g.num != g.maxNum) {
       assignGroup(ISoftware.assimilationCenter, "button1")
     }
+      */
 }
 
 document.getElementById("assimilationBaseGridbutton2").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button2")
+  /*
   var g = ISelUpgrade.group.group2;
 
   if (ISoftware.assimilationCenter.button2.active) {
@@ -2354,9 +2459,12 @@ document.getElementById("assimilationBaseGridbutton2").onclick = function () {
     if (!(ISoftware.assimilationCenter.button2.active) && g.num != g.maxNum) {
       assignGroup(ISoftware.assimilationCenter, "button2")
     }
+      */
 }
 
 document.getElementById("assimilationBaseGridbutton3").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button3")
+  /*
   var g = ISelUpgrade.group.group2;
 
   if (ISoftware.assimilationCenter.button3.active) {
@@ -2367,12 +2475,26 @@ document.getElementById("assimilationBaseGridbutton3").onclick = function () {
     if (!(ISoftware.assimilationCenter.button3.active) && g.num != g.maxNum) {
       assignGroup(ISoftware.assimilationCenter, "button3")
     }
+      */
 }
+
+document.getElementById("assimilationBaseGridbutton4").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button4")
+}
+
+document.getElementById("assimilationBaseGridbutton5").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button5")
+}
+
+document.getElementById("assimilationBaseGridbutton6").onclick = function () {
+  assignGroup(ISoftware.assimilationCenter, "button6")
+}
+
 
 //energy
 
 //energy respec
-document.getElementById("respectEnergy").onclick = function () {
+document.getElementById("respecEnergy").onclick = function () {
   for (x in IEnergy.energyUpgrades) {
     IEnergy.energyUpgrades[x].level = 0;
   }
@@ -2460,7 +2582,7 @@ document.getElementById("A3").onclick = function () {
 }
 
 document.getElementById("A4").onclick = function () {
-  changePage("global", "software1")
+  changePage("global", "software2")
 }
 
 document.getElementById("A5").onclick = function () {
@@ -2526,10 +2648,9 @@ async function offProgress(time) {
     waiting = true;
 
     fullSetter()
+    waiting = false;
 
     IGameData.tickSpeedMult = 0.05
-
-    waiting = false;
   }
 }
 
@@ -2611,6 +2732,7 @@ function loopShow() {
   if (IShowableClass.init) {
     unlockShow("hardwareSummary", true)
     unlockShow("softwareSummary", false)
+    unlockShow("communicationSummary", false)
     unlockShow("visualModule2", false)
     unlockShow("visualModule3", false)
 
@@ -2643,16 +2765,54 @@ function loopShow() {
     unlockShow("monument8", false)
     unlockShow("monument9", false)
     unlockShow("monument10", false)
+    unlockShow("monument11", true)
+    unlockShow("monument12", false)
+    unlockShow("monument13", false)
+    unlockShow("monument14", true)
+    unlockShow("monument15", true)
+    unlockShow("monument16", true)
+    unlockShow("monument17", true)
+    unlockShow("monument18", false)
+    unlockShow("monument19", false)
+    unlockShow("monument20", false)
+    unlockShow("monument21", true)
+
+    //population upgrades
+
+    unlockShow("assimilation1", true)
+    unlockShow("assimilation2", true)
+    unlockShow("softUpgrade1", true)
+    unlockShow("softUpgrade2", true)
+    unlockShow("softUpgrade3", true)
+    unlockShow("softUpgrade4", false)
+    unlockShow("softUpgrade5", true)
+    unlockShow("softUpgrade6", true)
+    unlockShow("softUpgrade7", false)
+
+    //population center
+
+    unlockShow("software1assimilationCenterInfo", false)
+    unlockShow("software1assimilationCenter", false)
+    unlockShow("assimilationBaseGridbutton1", true)
+    unlockShow("assimilationBaseGridbutton2", true)
+    unlockShow("assimilationBaseGridbutton3", true)
+
+    unlockShow("software2assimilationCenterInfo", false)
+    unlockShow("software2assimilationCenter", false)
+    unlockShow("assimilationBaseGridbutton1", true)
+    unlockShow("assimilationBaseGridbutton2", true)
+    unlockShow("assimilationBaseGridbutton3", true)
 
     IShowableClass.init = false;
   }
 
   //valutes
-  if (checkShow("softwareTab")) {
+  if (checkShow("A2")) {
     unlockShow("assimilatedValute", true)
+    unlockShow("softwareSummary", true)
   }
 
-  if (checkShow("communicationTab")) {
+  if (checkShow("A5")) {
     unlockShow("energyValute", true)
   }
 
@@ -2667,22 +2827,6 @@ function loopShow() {
       unlockShow("hardwareTab", true)
     }
   }
-
-  if (ITopProgress.progress.p2Check()) {
-    if (ITopProgress.actualProgress < 3) {
-      ITopProgress.actualProgress = 3;
-      unlockShow("assimilatedValute", true)
-      unlockShow("softwareTab", true)
-    }
-  }
-
-  if (ITopProgress.progress.p3Check()) {
-    if (ITopProgress.actualProgress < 4) {
-      ITopProgress.actualProgress = 4;
-      unlockShow("communicationTab", true)
-    }
-  }
-
 
   //expansor
 
@@ -2732,17 +2876,110 @@ function loopShow() {
   }
 
   if (IExpansor.monuments.monument6.active) {
-    unlockShow("assimilationCenter", true)
+    unlockShow("token3", true)
+    unlockShow("visualModule2", true)
+    unlockShow("monument7", true)
   }
 
   if (IExpansor.monuments.monument7.active) {
-    unlockShow("visualModule3", true)
-    unlockShow("token5", true)
+    unlockShow("automation2", true)
+    unlockShow("monument8", true)
   }
 
   if (IExpansor.monuments.monument8.active) {
+    unlockShow("expansor2U1", true)
+    unlockShow("expansor2U2", true)
+    unlockShow("monument9", true)
+  }
+
+  if (IExpansor.monuments.monument9.active) {
+    ISelUpgrade.group.group3.maxNum = 2;
+    unlockShow("monument10", true)
+  }
+
+  if (IExpansor.monuments.monument10.active) {
+    unlockShow("A6", true)
+
+    ICanvas.screen.line5.active = true;
+  }
+
+  if (IExpansor.monuments.monument11.active) {
+    unlockShow("software1assimilationCenterInfo", true)
+    unlockShow("software1assimilationCenter", true)
+    unlockShow("softUpgrade4", true)
+    unlockShow("monument12", true)
+  }
+
+  if (IExpansor.monuments.monument12.active) {
+    unlockShow("token4", true)
+    unlockShow("monument13", true)
+  }
+
+  if (IExpansor.monuments.monument13.active) {
+    unlockShow("A5", true)
+    unlockShow("energyValute", true)
+
+    ICanvas.screen.line3.active = true;
+  }
+
+  if (IExpansor.monuments.monument10.active &&
+    IExpansor.monuments.monument13.active
+  ) {
+    unlockShow("A4", true)
+
+    ICanvas.screen.line4.active = true;
+    ICanvas.screen.line6.active = true;
+  }
+
+  if (IExpansor.monuments.monument14.active) {
+    unlockShow("token8", true)
+    unlockShow("token9", true)
+    unlockShow("components1Tier2", true)
+  }
+
+  if (IExpansor.monuments.monument15.active) {
+    unlockShow("token10", true)
+    unlockShow("token11", true)
+    unlockShow("components2Tier2", true)
+  }
+
+  if (IExpansor.monuments.monument16.active) {
     unlockShow("visualModule3", true)
+    unlockShow("communicationSummary", true)
+    unlockShow("token5", true)
     unlockShow("token6", true)
+  }
+
+  if (IExpansor.monuments.monument17.active) {
+    unlockShow("expansor3U1", true)
+    unlockShow("expansor3U2", true)
+    unlockShow("monument18", true)
+  }
+
+  if (IExpansor.monuments.monument18.active) {
+    ISelUpgrade.group.group4.maxNum = 2;
+    unlockShow("monument19", true)
+  }
+
+  if (IExpansor.monuments.monument19.active) {
+    unlockShow("automation3", true)
+    unlockShow("monument20", true)
+  }
+
+  if (IExpansor.monuments.monument20.active) {
+    unlockShow("A7", true)
+    unlockShow("A8", true)
+
+    ICanvas.screen.line7.active = true;
+    ICanvas.screen.line8.active = true;
+    ICanvas.screen.line9.active = true;
+    ICanvas.screen.line10.active = true;
+  }
+
+  if (IExpansor.monuments.monument21.active) {
+    unlockShow("software2assimilationCenterInfo", true)
+    unlockShow("software2assimilationCenter", true)
+    unlockShow("softUpgrade7", true)
   }
 
   //assimilationCenter
@@ -2753,14 +2990,18 @@ function loopShow() {
     unlockShow("assimilationBaseGridbutton3", true)
   }
 
+  if (checkShow("software2assimilationCenter")) {
+    unlockShow("assimilationBaseGridbutton4", true)
+    unlockShow("assimilationBaseGridbutton5", true)
+    unlockShow("assimilationBaseGridbutton6", true)
+  }
+
 }
 
 function changePage(type, page) {
   if (type == "selector") {
     unlockShow("core", false)
     unlockShow("hardware", false)
-    unlockShow("software", false)
-    unlockShow("communication", false)
     unlockShow("options", false)
     unlockShow("progress", false)
 
@@ -2805,17 +3046,9 @@ function visualLoopFunction() {
     if (checkShow("hardware")) {
       visualHardware();
       visualAutomation();
-    }
-
-    if (checkShow("software")) {
       visualSoftware()
-    }
-
-    if (checkShow("communication")) {
       visualCommunication()
     }
-
-    console.log(IShowableClass.showable)
 
     visualProgress();
     visualComponentsLoadout();
@@ -2883,7 +3116,12 @@ document.addEventListener('visibilitychange', function () {
 
 function CanvasLines(selCanvas) {
 
+
   const canvas = document.getElementById(selCanvas);
+
+  canvas.height = document.getElementById("hardware").offsetHeight;
+  canvas.width = document.getElementById("hardware").offsetWidth;
+
   const canvasHeight = canvas.height
 
   const canvasWidth = canvas.width;
@@ -2894,6 +3132,8 @@ function CanvasLines(selCanvas) {
       var sel = ICanvas.screen[x]
 
       x = canvas.getContext("2d")
+
+      x.lineWidth = 10;
 
       curvedX = canvasWidth * sel.startX
 
@@ -2907,4 +3147,26 @@ function CanvasLines(selCanvas) {
         x.stroke();
       }
     }
+
+}
+function resetCanvas() {
+  const c = document.getElementById("screenCanvas");
+  const ctx = c.getContext("2d");
+
+  // Clear the canvas using its actual width and height
+  ctx.clearRect(0, 0, c.width, c.height);
+}
+
+//developer functions
+
+function addCells(x) {
+  IGameData.cells = IGameData.cellsProd
+}
+
+function addPopulation(x) {
+  IGameData.assimilated = IGameData.assimilatedProd
+}
+
+function addEnergy(x) {
+  IGameData.energy = IGameData.energyProd
 }

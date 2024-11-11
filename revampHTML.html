@@ -40,13 +40,9 @@
 
         <div id="selectorTab" class="defaultStyle">
             <div id="selectors">
-                <div><button id="coreTab" class="defaultButton">Core</button></div>
-                <div><button id="hardwareTab" class="defaultButton">Hardware</button></div>
-
-                <div><button id="softwareTab" class="defaultButton">Software</button></div>
-
-                <div><button id="communicationTab" class="defaultButton">Communication</button></div>
-                <div><button id="optionsTab" class="defaultButton">Options</button></div>
+                <div><button id="coreTab" class="defaultButton">CORE</button></div>
+                <div><button id="hardwareTab" class="defaultButton">KARDASHEV</button></div>
+                <div><button id="optionsTab" class="defaultButton">OPTIONS</button></div>
             </div>
             <div id="progressTab" class="defaultButton"><button class="defaultStyle">Progress</button></div>
         </div>
@@ -57,6 +53,9 @@
                 <div><button id="exportSave" class="defaultButton">Export Save</button></div>
                 <div><button id="importSave" class="defaultButton">Import Save</button></div>
                 <textarea class="input-like" id="Save" name="Save" rows="4" cols="50"></textarea><br>
+                <button onclick="addCells()" class="defaultStyle">add cells</button>
+                <button onclick="addPopulation()" class="defaultStyle">add population</button>
+                <button onclick="addEnergy()" class="defaultStyle">add energy</button>
             </div>
 
             <textarea class="input-like" id="offSave" name="passiveSave" rows="4" cols="50"></textarea><br>
@@ -145,19 +144,25 @@
             </div>
 
             <div id="componentSelector">
+
+                <div id="componentSelectorText">COMPONENTS</div>
+
                 <div class="item defaultButton" id="visualModule1">
+                    <div class="visualModuleText defaultStyle">HARDWARE</div>
                     <button onclick="showComponents('component1')" id="component1Module" class="defaultButton"
                         style="height: 7vw; width: 7vw; background: url(images/plus.png); background-size: cover;">
                     </button>
                 </div>
 
                 <div class="item defaultButton" id="visualModule2">
+                    <div class="visualModuleText defaultStyle">SOFTWARE</div>
                     <button onclick="showComponents('component2')" id="component2Module" class="defaultButton"
                         style="height: 7vw; width: 7vw; background: url(images/plus.png); background-size: cover;">
                     </button>
                 </div>
 
                 <div class="item defaultButton" id="visualModule3">
+                    <div class="visualModuleText defaultStyle">COMMUNICATION</div>
                     <button onclick="showComponents('component3')" id="component3Module" class="defaultButton"
                         style="height: 7vw; width: 7vw; background: url(images/plus.png); background-size: cover;">
                     </button>
@@ -181,11 +186,9 @@
             </div>
 
 
-            <div id="componentTab" class="defaultStyle">
-                <div id="componentFlex1">
+            <div id="componentTab" class="defaultButtonSkin">
                     <div id="componentLevel" class="defaultStyle centerDiv"></div>
                     <div id="componentName" class="defaultStyle centerDiv"></div>
-                </div>
                 <div id="componentEffect" class="defaultStyle centerDiv"></div>
             </div>
 
@@ -201,6 +204,7 @@
                             style="background-image: 'images/token2.jpg;'"></button>
                     </div>
                     <div id="components1Tier2">
+                        <div>CHARGED</div>
                         <button id="token8" class="tokenSizes defaultButton" onclick=""
                             style="background-image: 'images/token8.jpg;'"></button>
 
@@ -224,6 +228,7 @@
                             style="background-image: 'images/token4.jpg;'"></button>
                     </div>
                     <div id="components2Tier2">
+                        <div>CHARGED</div>
                         <button id="token10" class="tokenSizes defaultButton" onclick=""
                             style="background-image: 'images/token3.jpg;'"></button>
 
@@ -234,6 +239,7 @@
 
                 <div class="flex-container" id="component3List">
                     <div id="components3Tier1">
+                        <div>TIER 1</div>
                         <button id="token5" class="tokenSizes defaultButton" onclick=""
                             style="background-image: 'images/token5.jpg;'"></button>
                         <button id="token6" class="tokenSizes defaultButton" onclick=""
@@ -260,6 +266,21 @@
 
         <div id="hardware">
 
+            <canvas id="screenCanvas">test</canvas>
+            <div id="screen">
+                <button id="A1" class="defaultButton"></button>
+                <button id="A2" class="defaultButton"></button>
+                <button id="A3" class="defaultButton"></button>
+
+                <button id="A4" class="defaultButton"></button>
+                <button id="A5" class="defaultButton"></button>
+                <button id="A6" class="defaultButton"></button>
+
+                <button id="A7" class="defaultButton"></button>
+                <button id="A8" class="defaultButton"></button>
+                <button id="A9" class="defaultButton"></button>
+            </div>
+
             <div id="opaqueScreen"></div>
 
             <div id="hardware1" class="kardashev defaultStyle">
@@ -285,14 +306,11 @@
                 <button id="automation1" class="defaultButton"></button>
                 <div id="hardware1Content2" class="defaultStyle">
                     <div class="monuments">
-                        <div class="baseMonuments defaultStyle"></div>
-                        <div class="monumentsGrid defaultStyle">
-                            <div id="monument1"></div>
-                            <div id="monument2"></div>
-                            <div id="monument3"></div>
-                            <div id="monument4"></div>
-                            <div id="monument5"></div>
-                        </div>
+                        <div id="monument1"></div>
+                        <div id="monument2"></div>
+                        <div id="monument3"></div>
+                        <div id="monument4"></div>
+                        <div id="monument5"></div>
                     </div>
                 </div>
 
@@ -321,41 +339,63 @@
                 <button id="automation2" class="defaultButton"></button>
                 <div id="hardware2Content2" class="defaultStyle">
                     <div class="monuments">
-                        <div class="baseMonuments defaultStyle"></div>
-                        <div class="monumentsGrid defaultStyle">
-                            <div id="monument6"></div>
-                            <div id="monument7"></div>
-                            <div id="monument8"></div>
-                            <div id="monument9"></div>
-                            <div id="monument10"></div>
-                        </div>
+                        <div id="monument6" class="defaultStyle"></div>
+                        <div id="monument7" class="defaultStyle"></div>
+                        <div id="monument8" class="defaultStyle"></div>
+                        <div id="monument9" class="defaultStyle"></div>
+                        <div id="monument10" class="defaultStyle"></div>
                     </div>
                 </div>
-
             </div>
 
             <div id="hardware3" class="kardashev defaultStyle">
+                <div id="hardware3Info" class="defaultStyle"></div>
+                <div id="hardware3Content1" class="defaultStyle">
+                    <div id="expansor3" class="defaultStyle">
+                        <button id="expansor3Button" class="expansorSector1 defaultButton">
+                            <div class="expansorsSector1Sub ">
+                                <div id="expansor3Name" class="SingleExpansorName"></div>
+                                <div id="expansor3Effect" class="SingleExpansorEffect"></div>
+                            </div>
+                            <div id="expansor3Level" class="expansorLevel "></div>
+                            <div id="expansor3Price" class="expansorPrice "></div>
+                        </button>
+
+                        <div class="expansorSector2 defaultStyle">
+                            <button id="expansor3U1" class="defaultButton"></button>
+                            <button id="expansor3U2" class="defaultButton"></button>
+                        </div>
+                    </div>
+                </div>
+                <button id="automation3" class="defaultButton"></button>
+                <div id="hardware3Content2" class="defaultStyle">
+                    <div class="monuments">
+                        <div id="monument17" class="defaultStyle"></div>
+                        <div id="monument18" class="defaultStyle"></div>
+                        <div id="monument19" class="defaultStyle"></div>
+                        <div id="monument20" class="defaultStyle"></div>
+                        
+                    </div>
+                </div>
             </div>
 
             <div id="software1" class="kardashev defaultStyle">
 
-                <div class="softwareUpgrades defaultStyle">
-                    <div class="softwareUpgradesBase defaultStyle">
-                        <div class="softwareUpgradesInfo defaultStyle"></div>
-                        <div class="softwareUpgradesCont">
-                            <div id="assimilation1">
-                                <button id="softUpgrade1" class="defaultButton"></button>
-                                <button id="softUpgrade2" class="defaultButton"></button>
-                                <button id="softUpgrade3" class="defaultButton"></button>
-                                <button id="softUpgrade4" class="defaultButton"></button>
-                            </div>
+                <div id="softwareUpgradesInfo" class="defaultStyle"></div>
+                <div id="software1Content1">
+                    <div class="softwareUpgradesCont defaultStyle">
+                        <div id="assimilation1">
+                            <button id="softUpgrade1" class="defaultButton"></button>
+                            <button id="softUpgrade2" class="defaultButton"></button>
+                            <button id="softUpgrade3" class="defaultButton"></button>
+                            <button id="softUpgrade4" class="defaultButton"></button>
                         </div>
                     </div>
                 </div>
 
+                <div id="software1assimilationCenterInfo" class="defaultStyle"></div>
                 <div id="software1assimilationCenter" class="defaultStyle">
                     <div class="assimilationCenterBase defaultStyle">
-                        <div class="assimilationCenterInfo"></div>
                         <div class="assimilationBaseGrid">
                             <button id="assimilationBaseGridbutton1" class="defaultButton"></button>
                             <button id="assimilationBaseGridbutton2" class="defaultButton"></button>
@@ -363,63 +403,77 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div id="software2" class="kardashev defaultStyle">
-        </div>
-
-        <div id="software3" class="kardashev defaultStyle">
-        </div>
-
-        <div id="communication1" class="kardashev defaultStyle">
-        </div>
-
-        <div id="communication2" class="kardashev defaultStyle">
-        </div>
-
-        <div id="communication3" class="kardashev defaultStyle">
-        </div>
-
-
-
-        <canvas id="screenCanvas" class="defaultStyle">test</canvas>
-        <div id="screen">
-            <button id="A1" class="defaultButton"></button>
-            <button id="A2" class="defaultButton"></button>
-            <button id="A3" class="defaultButton"></button>
-
-            <button id="A4" class="defaultButton"></button>
-            <button id="A5" class="defaultButton"></button>
-            <button id="A6" class="defaultButton"></button>
-
-            <button id="A7" class="defaultButton"></button>
-            <button id="A8" class="defaultButton"></button>
-            <button id="A9" class="defaultButton"></button>
-        </div>
-
-        <div id="expansorWindow" class="defaultStyle">
-            <div id="expansorName" class="defaultStyle">
-                EXPANSORS
-            </div>
-            <div id="expansors" class="defaultStyle">
-
-                <div id="expansor3" class="defaultStyle">
-
-                    <button id="expansor3Button" class="expansorSector1 defaultButton">
-                        <div class="expansorsSector1Sub ">
-                            <div id="expansor3Name" class="SingleExpansorName"></div>
-                            <div id="expansor3Effect" class="SingleExpansorEffect"></div>
-                        </div>
-                        <div id="expansor3Level" class="expansorLevel "></div>
-                        <div id="expansor3Price" class="expansorPrice "></div>
-                    </button>
-
-                    <div class="expansorSector2 defaultStyle">
-                        <button id="expansor3U1" class="defaultButton"></button>
-                        <button id="expansor3U2" class="defaultButton"></button>
+                <div id="software1Content2" class="defaultStyle">
+                    <div class="monuments">
+                        <div id="monument11"></div>
+                        <div id="monument12"></div>
+                        <div id="monument13"></div>
                     </div>
                 </div>
+            </div>
+
+            <div id="software2" class="kardashev defaultStyle">
+                <div id="softwareUpgradesInfo2" class="defaultStyle"></div>
+                <div id="software1Content1">
+                    <div class="softwareUpgradesCont defaultStyle">
+                        <div id="assimilation2">
+                            <button id="softUpgrade5" class="defaultButton"></button>
+                            <button id="softUpgrade6" class="defaultButton"></button>
+                            <button id="softUpgrade7" class="defaultButton"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="software2assimilationCenterInfo" class="defaultStyle"></div>
+                <div id="software2assimilationCenter" class="defaultStyle">
+                    <div class="assimilationCenterBase defaultStyle">
+                        <div class="assimilationBaseGrid">
+                            <button id="assimilationBaseGridbutton4" class="defaultButton"></button>
+                            <button id="assimilationBaseGridbutton5" class="defaultButton"></button>
+                            <button id="assimilationBaseGridbutton6" class="defaultButton"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="software1Content2" class="defaultStyle">
+                    <div class="monuments">
+                        <div id="monument21"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="software3" class="kardashev defaultStyle">
+            </div>
+
+            <div id="communication1" class="kardashev defaultStyle">
+
+                <div id="energyInfo" class="defaultStyle"></div>
+
+                <button id="respecEnergy" class="defaultButton">RESPEC ENERGY</button>
+
+                <div id="energyGrid" class="defaultStyle">
+                    <button id="energyButton1" class="defaultButton"></button>
+                    <button id="energyButton2" class="defaultButton"></button>
+                    <button id="energyButton3" class="defaultButton"></button>
+                    <button id="energyButton4" class="defaultButton"></button>
+                </div>
+
+                <div id="communication1Content1" class="defaultStyle">
+                    <div class="monuments">
+                        <div id="monument14"></div>
+                        <div id="monument15"></div>
+                        <div id="monument16"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="communication2" class="kardashev defaultStyle">
+                <button id="energyButton5" class="defaultButton"></button>
+                <button id="energyButton6" class="defaultButton"></button>
+            </div>
+
+            <div id="communication3" class="kardashev defaultStyle">
                 <div id="expansor4" class="defaultStyle">
 
                     <button id="expansor4Button" class="expansorSector1 defaultButton">
@@ -436,48 +490,11 @@
                         <button id="expansor4U2" class="defaultButton"></button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="expansorImage" class="defaultStyle">
-            <div id="expansorSide" class="defaultStyle">
-                <div id="expansorSide2" class="defaultStyle">
-                    <div id="automationTab">
-                        <button id="automation2" class="defaultButton"></button>
-                        <button id="automation3" class="defaultButton"></button>
-                        <button id="automation4" class="defaultButton"></button>
-                        <button id="automation5" class="defaultButton"></button>
-                    </div>
-                </div>
-                <div id="expansorImagePlace" class="defaultStyle">
-
-                </div>
-                <button id="monumentsHider" class="defaultButton">
-                    HIDE UNLOCKED MONUMENTS
-                </button>
+                <div id="automation4"></div>
+                <div id="automation5"></div>
             </div>
 
         </div>
-    </div>
-
-    <div id="communication">
-        <div id="energyTab" class="defaultStyle">
-            <div id="energyInfo" class="defaultStyle">
-            </div>
-
-            <button id="respectEnergy" class="defaultButton">RESPEC ENERGY</button>
-            <div id="energyGrid" class="defaultStyle">
-                <button id="energyButton1" class="defaultButton"></button>
-                <button id="energyButton2" class="defaultButton"></button>
-                <button id="energyButton3" class="defaultButton"></button>
-                <button id="energyButton4" class="defaultButton"></button>
-                <button id="energyButton5" class="defaultButton"></button>
-                <button id="energyButton6" class="defaultButton"></button>
-            </div>
-            <div id="energyOverclock" class="defaultStyle">
-
-            </div>
-        </div>
-    </div>
 
     </div>
     <script src="fullRevamp.js?v=0.1.37" charset="utf-8" type="text/javascript"></script>
