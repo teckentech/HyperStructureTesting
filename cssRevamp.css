@@ -151,7 +151,7 @@ button,
   position: absolute;
   display: flex;
   flex-direction: row;
-  justify-content:left;
+  justify-content: left;
   height: 100%;
   width: 50%;
 }
@@ -312,40 +312,50 @@ button,
   position: absolute;
   left: 0%;
   top: 35%;
-  width: 25%; /* Larghezza del contenitore principale */
+  width: 25%;
+  /* Larghezza del contenitore principale */
   height: 50%;
   font-family: 'Arial', sans-serif;
-  box-sizing: border-box; /* Include il padding nel calcolo della larghezza e altezza */
+  box-sizing: border-box;
+  /* Include il padding nel calcolo della larghezza e altezza */
 }
 
-#componentsList > div {
+#componentsList>div {
   width: 100%;
-  height: max-content; /* Assicurati che riempia tutto il contenitore */
+  height: max-content;
+  /* Assicurati che riempia tutto il contenitore */
   padding: 3%;
-  box-sizing: border-box; /* Include il padding nel calcolo della larghezza e altezza */
+  box-sizing: border-box;
+  /* Include il padding nel calcolo della larghezza e altezza */
 }
 
-#componentsList > div > div {
+#componentsList>div>div {
   position: relative;
   width: 100%;
   height: 100%;
-  box-sizing: border-box; /* Include il padding nel calcolo della larghezza */
+  box-sizing: border-box;
+  /* Include il padding nel calcolo della larghezza */
 }
 
-#componentsList > div > div > div {
+#componentsList>div>div>div {
   position: relative;
-  height: 10%;  /* Mantieni l'altezza al 10% se desiderato */
-  width: 100%;  /* Assicurati che occupi il 100% del contenitore genitore */
+  height: 10%;
+  /* Mantieni l'altezza al 10% se desiderato */
+  width: 100%;
+  /* Assicurati che occupi il 100% del contenitore genitore */
   padding: 3%;
   background: #487145;
   box-shadow: inset 0 0 0 2px #ffffff;
   color: #ffffff;
   font-family: 'Arial', sans-serif;
-  box-sizing: border-box; /* Include il padding nel calcolo della larghezza */
+  box-sizing: border-box;
+  /* Include il padding nel calcolo della larghezza */
 
   display: flex;
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center;     /* Centra verticalmente */
+  justify-content: center;
+  /* Centra orizzontalmente */
+  align-items: center;
+  /* Centra verticalmente */
 }
 
 #componentsList>div>div>button {
@@ -781,7 +791,7 @@ input[type=text] {
   grid-row-end: 1;
   grid-column-start: 1;
   grid-column-end: 1;
-  background:none;
+  background: none;
 
 }
 
@@ -790,7 +800,7 @@ input[type=text] {
   grid-row-end: 2;
   grid-column-start: 2;
   grid-column-end: 4;
-  background:none;
+  background: none;
 }
 
 
@@ -800,7 +810,7 @@ input[type=text] {
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 4;
-  background:none;
+  background: none;
 
   display: flex;
   align-items: center;
@@ -813,7 +823,6 @@ input[type=text] {
   display: flex;
   align-items: center;
   flex-direction: column;
-  
 }
 
 #cellsValute {
@@ -1136,7 +1145,7 @@ input[type=text] {
   /* Centra orizzontalmente */
   align-items: left;
 
-  border-style:double;
+  border-style: double;
   border-radius: 1%;
 
   height: 100%;
@@ -1213,7 +1222,7 @@ input[type=text] {
   background: #36454f;
 }
 
-.monumentName{
+.monumentName {
   font-weight: bold;
   text-transform: uppercase;
 
@@ -1516,7 +1525,7 @@ input[type=text] {
   grid-column-end: 11;
 }
 
-#energyInfo {
+#energyInfo1 {
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
@@ -1528,20 +1537,78 @@ input[type=text] {
   justify-content: space-between;
 }
 
-#energyInfo>div {
+#overclockInfo1 {
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 1%;
+}
+
+#overclockContainer1 {
+  grid-row-start: 6;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 3fr);
+  grid-template-rows: repeat(2, 2fr);
+
+  z-index: 1;
+}
+
+#overclockContainer1>div {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+#overclockContainer1>div>div {
+  pointer-events: none;
+}
+
+#energyInfo1>div {
   position: relative;
 
   margin: 1%;
 }
 
-#respecEnergy {
+#energyInfo2 {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#energyInfo2>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#respecEnergy1 {
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 11;
 }
 
-#energyGrid {
+#energyGrid1 {
   position: relative;
 
   display: grid;
@@ -1557,7 +1624,34 @@ input[type=text] {
   z-index: 1;
 }
 
-#energyGrid>button>div {
+#energyGrid1>button>div {
+  pointer-events: none;
+}
+
+#respecEnergy2 {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#energyGrid2 {
+  position: relative;
+
+  display: grid;
+
+  grid-row-start: 3;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 11;
+
+  grid-template-columns: repeat(2, 2fr);
+  grid-template-rows: repeat(1, 1fr);
+
+  z-index: 1;
+}
+
+#energyGrid2>button>div {
   pointer-events: none;
 }
 
@@ -1611,4 +1705,223 @@ input[type=text] {
   grid-row-end: 11;
   grid-column-start: 1;
   grid-column-end: 11;
+}
+
+#communication2Content1 {
+  grid-row-start: 6;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 11;
+}
+
+#softwareUpgradesInfo3 {
+  position: relative;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 6;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#softwareUpgradesInfo3 {
+  padding: 1%;
+}
+
+#software3Content2 {
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+#software3assimilationCenter {
+  position: relative;
+
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#software3assimilationCenterInfo {
+  position: relative;
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 6;
+  grid-column-end: 11;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#software3assimilationCenterInfo>div {
+  position: relative;
+
+  margin: 1%;
+}
+
+#assimilationBaseGridbutton7 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#assimilationBaseGridbutton8 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 4;
+  grid-column-end: 7;
+}
+
+#assimilationBaseGridbutton9 {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 7;
+  grid-column-end: 10;
+}
+
+#expansor4 {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 100%;
+}
+
+#expansor4Button {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 100%;
+}
+
+#expansorPotential {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#potentialUpgrades1 {
+  grid-row-start: 4;
+  grid-row-end: 7;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#potentialEnergy1 {
+  grid-row-start: 8;
+  grid-row-end: 11;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#potentialInfo{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 6;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+#potentialInfo>div{
+  margin: 1%;
+}
+
+#communication3Content1 {
+  grid-row-start: 2;
+  grid-row-end: 8;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+.softwareUpgradesContVar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.softwareUpgradesContVar>div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.softwareUpgradesContVar>div>button {
+  position: relative;
+  width: 100%;
+  height: 33%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.softwareUpgradesContVar>div>button>div {
+  position: relative;
+  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+
+  font-size: 80%;
+
+  pointer-events: none;
+}
+
+#respecEnergy3 {
+  grid-row-start: 7;
+  grid-row-end: 8;
+  grid-column-start: 6;
+  grid-column-end: 11;
+}
+
+#energyGrid3 {
+  position: relative;
+
+  display: grid;
+
+  grid-row-start: 8;
+  grid-row-end: 11;
+  grid-column-start: 6;
+  grid-column-end: 11;
+
+  grid-template-columns: repeat(2, 2fr);
+  grid-template-rows: repeat(1, 1fr);
+
+  z-index: 1;
+}
+
+#energyGrid3>button>div {
+  pointer-events: none;
+}
+
+#breakthrough1{
+  grid-row-start: 8;
+  grid-row-end: 11;
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+#breakthrough1Button{
+height:100%;
+width: 100%;
 }
