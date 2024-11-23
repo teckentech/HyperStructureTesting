@@ -272,15 +272,15 @@ class Expansor {
     options = options || {}
     this.expansors = options.expansors || {
       expansor1: {
-        name: "Unit", nameF: true, description: "EXPANSION/S: +", descriptionF: true, level: 0, maxLevel: 2401, effect: 0, price1: 0, priceIdentity: "cells", priceIdentityF: true
+        name: "Unit", nameF: true, description: `EXPANSION/S: +`, descriptionF: true, level: 0, maxLevel: 2401, effect: 0, price1: 0, priceIdentity: "cells", priceIdentityF: true
       },
 
       expansor2: {
-        name: "Block", nameF: true, description: "UNIT Max Level: +", descriptionF: true, level: 0, maxLevel: 343, effect: 0, price1: 0, priceIdentity: "assimilated", priceIdentityF: true
+        name: "Block", nameF: true, description: "UNIT MAX LEVEL: +", descriptionF: true, level: 0, maxLevel: 343, effect: 0, price1: 0, priceIdentity: "assimilated", priceIdentityF: true
       },
 
       expansor3: {
-        name: "Sector", nameF: true, description: "BLOCK Max Level: +", descriptionF: true, level: 0, maxLevel: 49, effect: 0, price1: 0, priceIdentity: "energy", priceIdentityF: true
+        name: "Sector", nameF: true, description: "BLOCK MAX LEVEL: +", descriptionF: true, level: 0, maxLevel: 49, effect: 0, price1: 0, priceIdentity: "energy", priceIdentityF: true
       },
 
       expansor4: {
@@ -290,27 +290,27 @@ class Expansor {
 
     this.expansorsUpgrades = options.expansorsUpgrades || {
       expansor1U1: {
-        description: "UNIT effect gives CELLS/S: +", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
+        description: "UNIT produces CELLS/S: + ", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
       },
 
       expansor1U2: {
-        description: "UNIT boosts UNIT EFFECT: ×", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
+        description: "UNIT boosts UNIT EFFECT: × ", descriptionF: true, effect: 0, group: "group1", groupF: true, descriptionF: true, active: false
       },
 
       expansor2U1: {
-        description: "MAX POPULATION: ×", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
+        description: "MAX POPULATION: × ", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
       },
 
       expansor2U2: {
-        description: "BLOCK makes UNIT cheaper: /", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
+        description: "BLOCK makes UNIT CHEAPER: / ", descriptionF: true, effect: 0, group: "group3", groupF: true, descriptionF: true, active: false
       },
 
       expansor3U1: {
-        description: "SECTOR boosts ENERGY/S: ×", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
+        description: "SECTOR boosts ENERGY/S: × ", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
       },
 
       expansor3U2: {
-        description: "UNIT price: /", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
+        description: "UNIT PRICE: / ", descriptionF: true, effect: 0, group: "group4", groupF: true, descriptionF: true, active: false
       },
     }
 
@@ -478,102 +478,102 @@ class Software {
 
     this.upgrades = options.upgrades || {
       softUpgrade1: {
-        name: "MAX POPULATION: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "MAX POPULATION: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade2: {
-        name: "POPULATION/S: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "POPULATION/S: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade3: {
-        name: "T1 COMPONENTS Price: /", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "T1 COMPONENTS PRICE: / ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade4: {
-        name: "POPULATION CENTER selectable: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "POPULATION CENTER SELECTABLE: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       //software upgrades 2
 
       softUpgrade5: {
-        name: "MAX POPULATION: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "MAX POPULATION: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade6: {
-        name: "ENERGY UPGRADES PRICE /:", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "ENERGY UPGRADES PRICE : / ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade7: {
-        name: "POPULATION CENTER selectable: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "POPULATION CENTER SELECTABLE: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       //software upgrades 3
 
       softUpgrade8: {
-        name: "MAX POPULATION: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "MAX POPULATION: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 111, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade9: {
-        name: "CELLS boosts POPULATION/S", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "CELLS boosts POPULATION/S: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade10: {
-        name: "POPULATION CENTER selectable: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "POPULATION CENTER SELECTABLE: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade11: {
-        name: "CELLS/S: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "CELLS/S: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       //communication3
       softUpgrade12: {
-        name: "MAX POTENTIAL: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "MAX POTENTIAL: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
 
       softUpgrade13: {
-        name: "CLUSTER EFFECT: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "CLUSTER EFFECT: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
 
       softUpgrade14: {
-        name: "POTENTIAL boosts ALL VALUTES: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "POTENTIAL boosts ALL VALUTES: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
     }
 
     this.assimilationCenter = options.assimilationCenter || {
       button1: {
-        name: "Open Population Center", description: "MAX POPULATION: X", effect: 0, price: 0, priceIdentity: "ASSIMILATED", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Open Population Center", description: "MAX POPULATION: × ", effect: 0, price: 0, priceIdentity: "ASSIMILATED", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button2: {
-        name: "Intranet Jobs", description: "CELLS/S: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Intranet Jobs", description: "CELLS/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button3: {
-        name: "Deep Sleep Protocol", description: "POPULATION/S: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Deep Sleep Protocol", description: "POPULATION/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group2", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button4: {
-        name: "Deeper Processes", description: "POPULATION boosts POPULATION/S: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Deeper Processes", description: "POPULATION boosts POPULATION/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button5: {
-        name: "Centralized Energy", description: "boost ENERGY/S by: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Centralized Energy", description: "ENERGY/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button6: {
-        name: "Global Intranet", description: "boost TICKSPEED by: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
+        name: "Global Intranet", description: "TICKSPEED: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group5", active: false, nameF: true, descriptionF: true, groupF: true
       },
 
       button7: {
-        name: "Tecnological Revolution", description: "CELLS/S reduces UNIT price: /", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
+        name: "Tecnological Revolution", description: "CELLS/S reduces UNIT PRICE: / ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
       },
 
       button8: {
-        name: "Potential Feeders", description: "ENERGY boosts ENERGY/S: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
+        name: "Potential Feeders", description: "ENERGY boosts ENERGY/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
       },
 
       button9: {
-        name: "Netsphere Prototype", description: "EXPANSION/S: ×", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
+        name: "Netsphere Prototype", description: "EXPANSION/S: × ", effect: 0, price: 0, priceIdentity: "POPULATION", group: "group7", active: false, nameF: true, descriptionF: true
       },
     }
   }
@@ -586,50 +586,50 @@ class Energy {
     this.energyUpgrades = options.energyUpgrades || {
 
       energyButton1: {
-        name: "ENERGY/S: +", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ENERGY/S: + ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton2: {
-        name: "All ENERGY UPGRADES: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ALL ENERGY UPGRADES: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton3: {
-        name: "All CHARGED COMPONENTS: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ALL CHARGED COMPONENTS: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton4: {
-        name: "ENERGY boosts all VALUTES: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "ENERGY boosts ALL VALUTES: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton5: {
-        name: "OVERCLOCK effect boosted", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "OVERCLOCK EFFECT boosted", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton6: {
-        name: "OVERCLOCK quantity: +", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
+        name: "OVERCLOCK SELECTABLE: + ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "cells", priceIdentityF: true,
       },
       energyButton7: {
-        name: "POTENTIAL/S: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "POTENTIAL/S: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
       energyButton8: {
-        name: "POTENTIAL boosts CELLS/S: ×", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "POTENTIAL boosts CELLS/S: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
 
     }
 
     this.overclock = options.overclock || {
       overclock1: {
-        description: "CELLS/S: ×", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "CELLS/S: × ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
       overclock2: {
-        description: "CELLS/S: ^", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "CELLS/S: ^ ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
       overclock3: {
-        description: "POPULATION/S: ×", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "POPULATION/S: × ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
       overclock4: {
-        description: "POPULATION/S: ^", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "POPULATION/S: ^ ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
       overclock5: {
-        description: "ENERGY/S: ×", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "ENERGY/S: × ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
       overclock6: {
-        description: "ENERGY/S: ^", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
+        description: "ENERGY/S: ^ ", effect: 0, active: false, level: 0, group: "group6", descriptionF: true, groupF: true
       },
 
     }
@@ -1117,9 +1117,9 @@ function visualHardware() {
     expansionValute = IExpansor.expansors.expansor1.effect
   }
 
-  update("hardware1Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
-  update("hardware2Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
-  update("hardware3Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S by: " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
+  update("hardware1Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S: × " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
+  update("hardware2Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S: × " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
+  update("hardware3Info", "<div> EXPANSION: " + format(IGameData.expansionProd) + "<div>EXPANSION multiply CELLS/S: × " + format(IGameData.expansion) + "</div>" + "</div> <div>EXPANSORS</div>")
 
   //expansors
 
@@ -1339,7 +1339,7 @@ function visualCommunication() {
 
 
   //overclock
-  update("overclockInfo1", `<div> SELECTED: ${ISelUpgrade.group.group6.num} / ${ISelUpgrade.group.group6.maxNum} </div><div> OVERCLOCK </div>`)
+  update("overclockInfo1", `<div> SELECTABLE: ${ISelUpgrade.group.group6.num} / ${ISelUpgrade.group.group6.maxNum} </div><div> OVERCLOCK </div>`)
 
 
   for (let x in IEnergy.overclock) {
