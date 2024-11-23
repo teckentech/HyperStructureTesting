@@ -1373,8 +1373,8 @@ function visualCommunication() {
 
 
 
-                                 console.log(format(IGameData.potentialProd))
-  if (IGameData.potentialProd >= (10 ** 19)) {
+                                 console.log(format(IGameData.potentialProd ))
+  if (IGameData.potentialProd >= (5 * 10 ** 18)) {
     console.log("test")
     document.getElementById("breakthrough1Button").style.background = "#004526"
   }
