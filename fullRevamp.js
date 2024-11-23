@@ -413,7 +413,7 @@ class Expansor {
       },
 
       monument24: {
-        name: "Megastructure: First Shell", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Communication 3: Potential Upgrades", unlockedF: true, active: false
+        name: "Megastructure: First Shell", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Communication 3: New Upgrades", unlockedF: true, active: false
       },
 
       monument25: {
@@ -421,7 +421,7 @@ class Expansor {
       },
 
       monument26: {
-        name: "Kardashev Scale 0.99", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Communication 3: Energy Upgrades", unlockedF: true, active: false
+        name: "Kardashev Scale 0.99", nameF: true, req1: 0, req2: 0, req3: 0, req4: 0, unlocked: "Communication 3: New Upgrades", unlockedF: true, active: false
       },
     }
   }
@@ -535,7 +535,7 @@ class Software {
       },
 
       softUpgrade14: {
-        name: "POTENTIAL boosts ALL VALUTES: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
+        name: "ALL VALUTES: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "potential", priceIdentityF: true,
       },
     }
 
@@ -1021,7 +1021,7 @@ function visualComponents() {
       var description = IComponents.components[selectedComp].description
       var effect1 = IComponents.components[selectedComp].effect1
 
-      updateClass(y + "Effect1", description + " " + format(effect1))
+      updateClass(y + "Effect1", description)
     }
   }
 }
@@ -1283,9 +1283,8 @@ function visualSoftware() {
     if (sel.priceIdentity == "assimilated") {
       var PriceIdentity = "POPULATION"
     }
-    else { PriceIdentity = sel.priceIdentity }
 
-    if (sel.priceIdentity == "potential") {
+    else if (sel.priceIdentity == "potential") {
       var PriceIdentity = "POTENTIAL"
     }
     else { PriceIdentity = sel.priceIdentity }
@@ -2144,6 +2143,10 @@ function valuesSetter() {
   var sel6 = IEnergy.energyUpgrades.energyButton6.level
 
   var totalLevel2 = sel5 + sel6
+
+  var adjuster3 = Math.floor(totalLevel2 / 5)
+
+  totalLevel2 = sel5 + sel6 - adjuster3
 
   //total level communication 3
 

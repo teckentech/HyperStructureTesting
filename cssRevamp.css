@@ -245,7 +245,12 @@ button,
   margin: 1%;
 }
 
+#loadoutShow>div>div {
+  display: flex;
 
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;
+}
 
 #loadoutName1 {
   height: 50%;
@@ -275,16 +280,13 @@ button,
   margin-bottom: 3%;
   display: flex;
   flex-direction: column;
-  background: #000000;
   margin: 3%;
-  color: #ffffff;
 
 }
 
 #componentsSummary>div>div {
   display: flex;
   flex-direction: column;
-  background: #000000;
   padding: 3%;
   color: #ffffff;
 
@@ -1982,4 +1984,11 @@ width: 100%;
 #r2 {
   display: flex;
   justify-content: space-evenly;
+}
+
+#loadoutButtons{
+  display: flex;
+
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;
 }

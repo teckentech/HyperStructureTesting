@@ -52,24 +52,25 @@
                 <div><button id="resetSave" class="defaultButton">RESET SAVE</button></div>
                 <div><button id="exportSave" class="defaultButton">Export Save</button></div>
                 <div><button id="importSave" class="defaultButton">Import Save</button></div>
-                <textarea class="input-like" id="Save" name="Save" rows="4" cols="50"></textarea><br></div>
+                <textarea class="input-like" id="Save" name="Save" rows="4" cols="50"></textarea><br>
+            </div>
 
             <textarea class="input-like" id="offSave" name="passiveSave" rows="4" cols="50"></textarea><br>
-        
-                <div id="resetScreen" class="defaultStyle">
-                    <div>DO YOU WANT TO RESET THE SAVE?</div>
-                    <div id="r2" style="display: flex; justify-content: space-evenly;">
-                        <button id="acceptReset" class="defaultButton" style="padding: 5%">
-                            YES
-                        </button>
-    
-                        <button id="refuseReset" class="defaultButton" style="padding: 5%">
-                            NO
-                        </button>
-                    </div>
-                </div>
 
-                <div id="opaqueScreen2"></div>
+            <div id="resetScreen" class="defaultStyle">
+                <div>DO YOU WANT TO RESET THE SAVE?</div>
+                <div id="r2" style="display: flex; justify-content: space-evenly;">
+                    <button id="acceptReset" class="defaultButton" style="padding: 5%">
+                        YES
+                    </button>
+
+                    <button id="refuseReset" class="defaultButton" style="padding: 5%">
+                        NO
+                    </button>
+                </div>
+            </div>
+
+            <div id="opaqueScreen2"></div>
         </div>
 
         <div id="progress" class="defaultStyle">
@@ -130,27 +131,33 @@
         <div id="core">
             <div id="loadoutShow" class="defaultStyle">
                 <div>
-                    LOADOUT 1
+                    <div>LOADOUT 1</div>
                     <div><input style="width: 70%" type="text" id="loadoutName1" name="loadout1" value="" disabled><br>
                     </div>
-                    <button id="saveLoadout1" class="defaultButton">save</button>
-                    <button id="loadLoadout1" class="defaultButton">load</button>
+                    <div class="loadoutButtons">
+                        <button id="saveLoadout1" class="defaultButton">save</button>
+                        <button id="loadLoadout1" class="defaultButton">load</button>
+                    </div>
                 </div>
 
                 <div>
-                    LOADOUT 2
+                    <div>LOADOUT 2</div>
                     <div><input style="width: 70%" type="text" id="loadoutName2" name="loadout1" value="" disabled><br>
                     </div>
-                    <button id="saveLoadout2" class="defaultButton">save</button>
-                    <button id="loadLoadout2" class="defaultButton">load</button>
+                    <div class="loadoutButtons">
+                        <button id="saveLoadout2" class="defaultButton">save</button>
+                        <button id="loadLoadout2" class="defaultButton">load</button>
+                    </div>
                 </div>
 
                 <div>
-                    LOADOUT 3
+                    <div>LOADOUT 3</div>
                     <div><input style="width: 70%" type="text" id="loadoutName3" name="loadout1" value="" disabled><br>
                     </div>
-                    <button id="saveLoadout3" class="defaultButton">save</button>
-                    <button id="loadLoadout3" class="defaultButton">load</button>
+                    <div class="loadoutButtons">
+                        <button id="saveLoadout3" class="defaultButton">save</button>
+                        <button id="loadLoadout3" class="defaultButton">load</button>
+                    </div>
                 </div>
             </div>
 
@@ -566,7 +573,7 @@
                     </div>
                 </div>
 
-                <button id="respecEnergy3" class="defaultButton">RESPEC ENERGY</button>
+                <button id="respecEnergy3" class="defaultButton">RESPEC</button>
 
                 <div id="energyGrid3" class="defaultStyle">
                     <button id="energyButton7" class="defaultButton"></button>
