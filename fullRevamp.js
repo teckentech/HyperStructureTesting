@@ -197,7 +197,7 @@ class Components {
 
     this.components = options.components || {
       token1: {
-        name: "PRODUCER", nameF: true, description: "CELLS/S: ×", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token1.png', imageF: true, active: false
+        name: "PRODUCER", nameF: true, description: "CELLS/S: +", descriptionF: true, level: 1, maxLevel: 100, effect1: 1, price: 0, tag1: "component1", tag1F: true, priceIdentity: "cells", priceIdentityF: true, image: 'images/token1.png', imageF: true, active: false
       },
 
       token2: {
