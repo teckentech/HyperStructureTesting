@@ -96,7 +96,7 @@ class ShowableClass {
       //layers
       opaqueScreen: false, hardware1: false, hardware2: false, hardware3: false,
       software1: false, software2: false, software3: false,
-      communication1: false, communication2: false, communication3: false,
+      communication1: false, communication2: false, communication3: false, resetScreen: false, opaqueScreen2: false,
 
       //kardashev
       A1: true, A2: false, A3: false,
@@ -977,7 +977,6 @@ function visualValute() {
 
   update("potentialValuteBase", format(IGameData.potential) + " POTENTIAL")
   update("potentialValuteProd", " + " + format(sec(IGameData.potentialProd)) + " POTENTIAL/S")
-
 }
 
 function visualComponents() {
@@ -1060,7 +1059,7 @@ function visualComponentInfo(id) {
 
     update("componentLevel", sel.level + " / " + sel.maxLevel);
     update("componentName", sel.name);
-    update("componentEffect", sel.description + " " + format(sel.effect1));
+    update("componentEffect", sel.description);
 
     update("componentsLevelUpDiv", "<div>LEVEL UP: </div>" + "<div>" + format(sel.price) + " " + sel.priceIdentity + "</div>")
   }
@@ -1551,6 +1550,7 @@ function valuesSetter() {
 
   token1.level = token1.level;
   token1.maxLevel = 100;
+  token1.description = `<div>CELLS/S: × ${format(token1.effect1)}</div>`
   token1.effect1 = Math.pow(token1.level + compToken5, 1.2)/* * componentEf1*/; //1.2
   token1.price = Math.pow(2, token1.level) / softUpgrade3;
 
@@ -1559,13 +1559,14 @@ function valuesSetter() {
   token2.level = token2.level;
   token2.maxLevel = 10;
   token2.effect1 = ((token2.level + compToken5) * 0.5 + 1)/* * componentEf1*/;
-  token2.description = `<div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^</div>`
+  token2.description = `<div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^ ${format(token2.effect1)}</div>`
   token2.price = Math.pow(100, 1.5 + token2.level) / softUpgrade3;
 
   var token3 = IComponents.components.token3
 
   token3.level = token3.level;
   token3.maxLevel = 100;
+  token3.description = `<div>ALL VALUTE/S: × ${format(token3.effect1)}</div>`
   token3.effect1 = ((token3.level + compToken5) * 0.2 + 1)/* * componentEf1*/;
   token3.price = (Math.pow(10, 15.5) * (Math.pow(1.35, token3.level))) / softUpgrade3;
 
@@ -1573,6 +1574,7 @@ function valuesSetter() {
 
   token4.level = token4.level;
   token4.maxLevel = 5;
+  token4.description = `<div>CELLS/S: -90%</div><div>POPULATION/S: × ${format(token4.effect1)}</div>`
   token4.effect1 = Math.pow(10, token4.level + compToken5)/* * componentEf1*/;
   token4.price = (Math.pow(10, 24) * Math.pow(1000, token4.level)) / softUpgrade3;
 
@@ -1580,6 +1582,7 @@ function valuesSetter() {
 
   token5.level = token5.level;
   token5.maxLevel = 3;
+  token5.description = `<div>ALL EQUIPPED COMPONENTS LEVEL: + ${format(token5.effect1)}</div>`
   token5.effect1 = token5.level/* * componentEf1*/;
   token5.price = (Math.pow(10, 33) * Math.pow((10 ** 9), token5.level)) / softUpgrade3;
 
@@ -1587,6 +1590,7 @@ function valuesSetter() {
 
   token6.level = token6.level;
   token6.maxLevel = 5;
+  token6.description = `<div>ALL VALUTES: -90%</div><div>ENERGY/S: × ${format(token6.effect1)}</div>`
   token6.effect1 = Math.pow(10, token6.level)/* * componentEf1*/;
   token6.price = (Math.pow(10, 35) * Math.pow((10 ** 7), token6.level)) / softUpgrade3;
 
@@ -1594,6 +1598,7 @@ function valuesSetter() {
 
   token7.level = token7.level;
   token7.maxLevel = 5;
+  token7.description = `<div>AXIOMS: + ${format(token7.effect1)}</div>`
   token7.effect1 = 0.1 * token7.level;
   token7.price = (Math.pow(10, 50) * Math.pow(Math.pow(10, 10), token7.level)) / softUpgrade3;
 
@@ -1601,6 +1606,7 @@ function valuesSetter() {
 
   token8.level = token8.level;
   token8.maxLevel = 1;
+  token8.description = `<div>ENERGY/S: -50% COMPOUND</div><div>CELLS/S: ×${format(token8.effect1)}</div>`
   token8.effect1 = Math.pow(token1.level + energy3 + compToken5, 1.7)/* * componentEf1*/; //1.2
   token8.price = 0;
 
@@ -1608,7 +1614,7 @@ function valuesSetter() {
 
   token9.level = token9.level;
   token9.maxLevel = 1;
-  token9.description = `ENERGY/S is reduced by 50% compound, <div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^</div>`
+  token9.description = `<div>ENERGY/S: -50% COMPOUND</div><div>(EXPANSION: ${format(IGameData.expansionProd)})</div><div>EXPANSION/S: ^ ${format(token9.effect1)}</div>`
   token9.effect1 = ((token2.level + energy3 + compToken5) * 0.5 + 1.5)/* * componentEf1*/;
   token9.price = 0;
 
@@ -1616,6 +1622,7 @@ function valuesSetter() {
 
   token10.level = token10.level;
   token10.maxLevel = 1;
+  token10.description = `<div>ENERGY/S: -50% COMPOUND</div><div>ALL VALUTES/S: × ${format(token10.effect1)}</div>`
   token10.effect1 = ((token3.level + energy3 + compToken5) * 1 + 1)/* * componentEf1*/;
   token10.price = 0
 
@@ -1623,6 +1630,7 @@ function valuesSetter() {
 
   token11.level = token11.level;
   token11.maxLevel = 1;
+  token11.description = `<div>ENERGY/S: -50% COMPOUND</div><div>CELLS/S: -90%</div><div>POPULATION/S: × ${format(token11.effect1)}</div>`
   token11.effect1 = Math.pow(13, token4.level + energy3 + compToken5)/* * componentEf1*/;
   token11.price = 0
 
@@ -1630,6 +1638,7 @@ function valuesSetter() {
 
   token12.level = token12.level;
   token12.maxLevel = 10;
+  token12.description = `<div>POTENTIAL/S: × ${format(token12.effect1)}</div>`
   token12.effect1 = Math.pow(1.5, token12.level + energy3 + compToken5)/* * componentEf1*/;
   token12.price = Math.pow(10, 124) * Math.pow(10, token12.level) / softUpgrade3
   //expansor
@@ -1987,7 +1996,7 @@ function valuesSetter() {
   var sel = ISoftware.upgrades.softUpgrade8
 
   sel.level = sel.level;
-  sel.maxLevel = 6;
+  sel.maxLevel = 7;
   sel.effect = Math.pow((10 ** 6), sel.level)
   sel.price = Math.pow(10, 20) * Math.pow(10 ** 6, 1 + sel.level)
 
@@ -2142,6 +2151,8 @@ function valuesSetter() {
   var sel8 = IEnergy.energyUpgrades.energyButton8.level
 
   var totalLevel3 = sel7 + sel8
+
+  console.log(totalLevel3)
 
   if (IEnergy.energyUpgrades.energyButton2.level > 0) {
     var Button2Ef = IEnergy.energyUpgrades.energyButton2.effect
@@ -2596,7 +2607,16 @@ function valuesSetterDinamic() {
 //options
 //save
 document.getElementById("resetSave").onclick = function () {
+  changePage("options", "resetScreen")
+}
+
+document.getElementById("acceptReset").onclick = function () {
+  changePage("options", "out")
   resetSave()
+}
+
+document.getElementById("refuseReset").onclick = function () {
+  changePage("options", "out")
 }
 
 document.getElementById("exportSave").onclick = function () {
@@ -3110,6 +3130,11 @@ document.getElementById("opaqueScreen").onclick = function () {
   changePage("global", "out")
 }
 
+document.getElementById("opaqueScreen2").onclick = function () {
+  changePage("options", "out")
+}
+
+
 document.getElementById("A1").onclick = function () {
   changePage("global", "hardware1")
 }
@@ -3145,6 +3170,7 @@ document.getElementById("A8").onclick = function () {
 document.getElementById("A9").onclick = function () {
   changePage("global", "communication3")
 }
+
 
 function activateAutomation(aut) {
   if (IAutomation.automators[aut].active) {
@@ -3623,6 +3649,7 @@ function changePage(type, page) {
     unlockShow("communication1", false)
     unlockShow("communication2", false)
     unlockShow("communication3", false)
+    unlockShow("resetScreen", false)
     unlockShow("opaqueScreen", false)
 
     if (page != "out") {
@@ -3630,6 +3657,17 @@ function changePage(type, page) {
       unlockShow(page, true)
     }
   }
+
+  if(type == "options") {
+    unlockShow("resetScreen", false)
+    unlockShow("opaqueScreen2", false)
+
+    if (page != "out") {
+      unlockShow("opaqueScreen2", true)
+      unlockShow(page, true)
+    }
+  }
+
 }
 
 function visualLoopFunction() {
