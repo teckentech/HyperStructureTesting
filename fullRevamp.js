@@ -1013,7 +1013,7 @@ function visualComponents() {
   for (let y in IComponents.equipped) {
 
     if (IComponents.equipped[y] == "") {
-      updateClass(y + "Effect1", "")
+      updateClass(y + "Effect1", "&nbsp;")
     }
     else {
 
@@ -1206,51 +1206,51 @@ function visualHardware() {
       var div1 = `<div style='background-color:${re1B}'>CELLS/S: ${format(selExp.req1)}</div>`
     }
     else {
-      div1 = "<div>-</div>"
+      div1 = "<div>&nbsp;</div>"
     }
     if (checkShow("assimilatedValute")) {
       var div2 = `<div style='background-color:${re2B}'>POPULATION/S: ${format(selExp.req2)}</div>`
     }
     else {
-      div2 = "<div>-</div>"
+      div2 = "<div>&nbsp;</div>"
     }
 
     if (checkShow("energyValute")) {
       var div3 = `<div style='background-color:${re3B}'>ENERGY/S: ${format(selExp.req3)}</div>`
     }
     else {
-      div3 = "<div>-</div>"
+      div3 = "<div>&nbsp;</div>"
     }
 
     if (checkShow("potentialValute")) {
       var div4 = `<div style='background-color:${re4B}'>POTENTIAL/S: ${format(selExp.req4)}</div>`
     }
     else {
-      div4 = "<div>-</div>"
+      div4 = "<div>&nbsp;</div>"
     }
 
     // Array con i valori da confrontare e i rispettivi colori
     if (!(selExp.active)) {
 
       ItMonumentsGrid =
-        `<div class="monumentName">${selExp.name}</div>` +
+        `<div class="monumentName  defaultButtonSkin">${selExp.name}</div>` +
         div1 +
         div2 +
         div3 +
-        div4 +
-        `<div>UNLOCKS ${selExp.unlocked}</div>`
+        div4 + 
+        `<div class="defaultButtonSkin">UNLOCKS ${selExp.unlocked}</div>`
 
     } else {
       if (IExpansor.showMonuments) {
         unlockShow(x, true)
 
         ItMonumentsGrid =
-          `<div class="monumentName">${selExp.name}</div>` +
-          div1 +
-          div2 +
-          div3 +
-          div4 +
-          `<div>UNLOCKS ${selExp.unlocked}</div>`
+        `<div class="monumentName defaultButtonSkin">${selExp.name}</div>` +
+        div1 +
+        div2 +
+        div3 +
+        div4 +
+        `<div class="defaultButtonSkin">UNLOCKS ${selExp.unlocked}</div>`
       }
 
       if (selExp.active) {
