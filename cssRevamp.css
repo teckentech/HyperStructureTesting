@@ -1253,6 +1253,7 @@ input[type=text] {
 
   grid-template-columns: repeat(10, 10fr);
   grid-template-rows: repeat(10, 10fr);
+
 }
 
 #screen>* {
@@ -1846,7 +1847,7 @@ input[type=text] {
 
 #communication3Content1 {
   grid-row-start: 2;
-  grid-row-end: 8;
+  grid-row-end: 7;
   grid-column-start: 1;
   grid-column-end: 6;
 }
@@ -1915,7 +1916,7 @@ input[type=text] {
 }
 
 #breakthrough1{
-  grid-row-start: 8;
+  grid-row-start: 7;
   grid-row-end: 11;
   grid-column-start: 1;
   grid-column-end: 6;

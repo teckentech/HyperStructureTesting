@@ -155,7 +155,7 @@ class ShowableClass {
       automation1: false, automation2: false, automation3: false,
 
       //potential
-      breakthrough1: false,
+      breakthrough1: false, respecEnergy3: false, energyGrid3: false,
     }
 
   }
@@ -1366,11 +1366,19 @@ function visualCommunication() {
   //breakthrough
 
   update("breakthrough1Button", `<div style="font-size: 2cqw;">BUILD THE FIRST STRATUM</div>
-    <div >REQUIRES 1E20 POTENTIAL</div>                             
+    <div >REQUIRES 1E20 POTENTIAL/S</div>                             
                                  <div><i>Resets everything</i></div>
                                  <i>Unlocks the Interstellar Stage</i>
                                  <div style="font-size: 2cqw;">WORK IN PROGRESS</div>`)
 
+
+
+  if (IGameData.potentialProd >= (10 ** 20)) {
+    document.getElementById("breakthrough1Button").style.background = "#004526"
+  }
+  else {
+    document.getElementById("breakthrough1Button").style.background = "#8d2424"
+  }
 }
 
 function visualScreen() {
@@ -1620,7 +1628,7 @@ function valuesSetter() {
 
   token12.level = token12.level;
   token12.maxLevel = 10;
-  token12.effect1 = Math.pow(1.3, token12.level + energy3 + compToken5)/* * componentEf1*/;
+  token12.effect1 = Math.pow(1.5, token12.level + energy3 + compToken5)/* * componentEf1*/;
   token12.price = Math.pow(10, 124) * Math.pow(10, token12.level) / softUpgrade3
   //expansor
 
@@ -1897,21 +1905,21 @@ function valuesSetter() {
   selMon.req1 = 0
   selMon.req2 = 0
   selMon.req3 = 0
-  selMon.req4 = 100;
+  selMon.req4 = 250;
 
   var selMon = IExpansor.monuments.monument25
 
   selMon.req1 = 0
   selMon.req2 = 0
   selMon.req3 = 0
-  selMon.req4 = (10 ** 4);
+  selMon.req4 = (3 * 10 ** 5);
 
   var selMon = IExpansor.monuments.monument26
 
   selMon.req1 = 0
   selMon.req2 = 0
   selMon.req3 = 0
-  selMon.req4 = (5 * 10 ** 7);
+  selMon.req4 = (2 * 10 ** 11);
   //Software
 
   //softUpgrades
@@ -2009,7 +2017,7 @@ function valuesSetter() {
   var sel = ISoftware.upgrades.softUpgrade12
 
   sel.level = sel.level;
-  sel.maxLevel = 10;
+  sel.maxLevel = 15;
   sel.effect = Math.pow(40, sel.level)
   sel.price = 5 * Math.pow(10, 3) * Math.pow(20, sel.level)
 
@@ -2126,6 +2134,13 @@ function valuesSetter() {
 
   var totalLevel2 = sel5 + sel6
 
+  //total level communication 3
+
+  var sel7 = IEnergy.energyUpgrades.energyButton7.level
+  var sel8 = IEnergy.energyUpgrades.energyButton8.level
+
+  var totalLevel3 = sel7 + sel8
+
   if (IEnergy.energyUpgrades.energyButton2.level > 0) {
     var Button2Ef = IEnergy.energyUpgrades.energyButton2.effect
   }
@@ -2185,20 +2200,22 @@ function valuesSetter() {
   sel.effect = sel.level
   sel.price = (Math.pow((10 ** 9), totalLevel2) * Math.pow(10, 72)) / softUp7
 
+  //POTENTIAL/S
   var sel = IEnergy.energyUpgrades.energyButton7
 
   sel.level = sel.level
   sel.maxLevel = 3
   sel.effect = sel.effect = Math.pow(1 + 0.1 * sel.level, Math.log(IGameData.potential))
 
-  sel.price = Math.pow(10, 10) * Math.pow(100, sel.level)
+  sel.price = Math.pow(10, 13) * Math.pow(100, totalLevel3)
 
+  //Potential boosts cells/s
   var sel = IEnergy.energyUpgrades.energyButton8
 
   sel.level = sel.level
   sel.maxLevel = 3
   sel.effect = Math.pow(1 + 0.1 * sel.level, Math.log(IGameData.potential))
-  sel.price = Math.pow(10, 10) * Math.pow(100, sel.level)
+  sel.price = Math.pow(10, 13) * Math.pow(100, totalLevel3)
 
   if (IEnergy.energyUpgrades.energyButton5.level > 0) {
     var overclockEffect = IEnergy.energyUpgrades.energyButton5.level + 1
@@ -3562,7 +3579,8 @@ function loopShow() {
   }
 
   if (IExpansor.monuments.monument26.active) {
-    unlockShow("potentialEnergy", true)
+    unlockShow("respecEnergy3", true)
+    unlockShow("energyGrid3", true)
     unlockShow("breakthrough1", true)
   }
 
