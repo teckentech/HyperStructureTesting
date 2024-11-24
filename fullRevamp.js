@@ -52,7 +52,7 @@ class GameData {
     this.tickSpeed = options.tickSpeed || 1;
     this.tickSpeedProd = options.tickSpeedProd || 1
 
-    this.offProgressLimit = options.offProgressLimit || 1800;
+    this.offProgressLimit = options.offProgressLimit || 21600;
     this.lastTick = options.lastTick || Date.now();
     //original tickspeed
     this.tickSpeedOff = options.tickSpeedOff || 0;
@@ -76,7 +76,7 @@ class ShowableClass {
       valute: true,
       cellsValute: true, assimilatedValute: false, energyValute: false, potentialValute: false,
 
-      core: true, options: false, progress: false, progressTab: false,
+      core: true, options: false, progress: false, progressTab: true,
 
       hardware: false,
 
@@ -99,11 +99,11 @@ class ShowableClass {
       communication1: false, communication2: false, communication3: false, resetScreen: false, opaqueScreen2: false,
 
       //kardashev
-      A1: true, A2: false, A3: false,
+      A1: false, A2: false, A3: false,
       A4: false, A5: false, A6: false,
       A7: false, A8: false, A9: false,
       //progress
-      p1: true, p2: false,
+      p1: true, p2: false, p3: false, p4: false, p5: false, p6: false,
 
       //components
 
@@ -167,9 +167,12 @@ class TopProgress {
     this.actualProgress = options.actualProgress || 1;
 
     this.progress = Object.freeze({
-      p1: "Hardware Layer at 100 cells", p1Check: function () { return IGameData.cells >= 100 },
-      p2: "Software Layer at 1e6 cells", p2Check: function () { return checkShow("A2") },
-      p3: "Communication Layer at 1e25 cells", p3Check: function () { return checkShow("A4") }
+      p1: "FIRST CELL", p1Check: function () { return checkShow("A1") },
+      p2: "KARDASHEV 0.5: MACHINE AGE", p2Check: function () { return checkShow("A2") },
+      p3: "KARDASHEV 0.6: SPACE AGE", p3Check: function () { return checkShow("A5") },
+      p4: "KARDASHEV 0.7: DIGITAL AGE", p4Check: function () { return checkShow("A7") },
+      p5: "KARDASHEV 0.8: EMERGENT AGE", p5Check: function () { return checkShow("A9") },
+      p6: "KARDASHEV 0.9: EXPEDITION AGE", p6Check: function () { return checkShow("A9") }
     });
 
   }
@@ -486,7 +489,7 @@ class Software {
       },
 
       softUpgrade3: {
-        name: "T1 COMPONENTS PRICE: / ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "TIER 1 COMPONENTS PRICE: / ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade4: {
@@ -514,7 +517,7 @@ class Software {
       },
 
       softUpgrade9: {
-        name: "CELLS boosts POPULATION/S: ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
+        name: "CELLS boosts POPULATION/S: × ", nameF: true, level: 0, maxLevel: 10, effect: 1, price: 0, priceIdentity: "assimilated", priceIdentityF: true,
       },
 
       softUpgrade10: {
@@ -1099,6 +1102,7 @@ function showComponents(componentType) {
 function visualProgress() {
   var locator = ITopProgress.actualProgress;
 
+  console.log(ITopProgress.progress["p" + locator])
   update("progressTab", ITopProgress.progress["p" + locator])
 
 }
@@ -1359,21 +1363,19 @@ function visualCommunication() {
   }
 
   //potential
-  update("potentialInfo", `<div>POTENTIAL: ${format(IGameData.potential)} / ${format(IGameData.maxPotential)}</div><div>POTENTIAL</div>`)
+  update("potentialInfo", `<div>POTENTIAL: ${format(IGameData.potential)} / ${format(IGameData.maxPotential)}</div><div>CANT BE BOOSTED BY OTHER FEATURES</div><div>POTENTIAL</div>`)
 
   //breakthrough
 
   update("breakthrough1Button", `<div style="font-size: 2cqw;">BUILD THE FIRST STRATUM</div>
     <div >REQUIRES 1E20 POTENTIAL/S</div>                             
                                  <div><i>Resets everything</i></div>
-                                 <i>Unlocks the Interstellar Stage</i>
+                                 <i>Unlocks the Space Stage</i>
                                  <div style="font-size: 2cqw;">WORK IN PROGRESS</div>`)
 
 
 
-                                 console.log(format(IGameData.potentialProd ))
   if (IGameData.potentialProd >= (5 * 10 ** 18)) {
-    console.log("test")
     document.getElementById("breakthrough1Button").style.background = "#004526"
   }
   else {
@@ -1582,8 +1584,8 @@ function valuesSetter() {
   token5.level = token5.level;
   token5.maxLevel = 3;
   token5.description = `<div>ALL EQUIPPED COMPONENTS LEVEL: + ${format(token5.effect1)}</div>`
-  token5.effect1 = token5.level/* * componentEf1*/;
-  token5.price = (Math.pow(10, 33) * Math.pow((10 ** 9), token5.level)) / softUpgrade3;
+  token5.effect1 = token5.level;
+  token5.price = (Math.pow(10, 37) * Math.pow((10 ** 9), token5.level)) / softUpgrade3;
 
   var token6 = IComponents.components.token6
 
@@ -1591,7 +1593,7 @@ function valuesSetter() {
   token6.maxLevel = 5;
   token6.description = `<div>ALL VALUTES: -90%</div><div>ENERGY/S: × ${format(token6.effect1)}</div>`
   token6.effect1 = Math.pow(10, token6.level)/* * componentEf1*/;
-  token6.price = (Math.pow(10, 35) * Math.pow((10 ** 7), token6.level)) / softUpgrade3;
+  token6.price = (Math.pow(10, 39) * Math.pow((10 ** 7), token6.level)) / softUpgrade3;
 
   var token7 = IComponents.components.token7
 
@@ -1638,7 +1640,7 @@ function valuesSetter() {
   token12.level = token12.level;
   token12.maxLevel = 10;
   token12.description = `<div>POTENTIAL/S: × ${format(token12.effect1)}</div>`
-  token12.effect1 = Math.pow(1.5, token12.level + energy3 + compToken5)/* * componentEf1*/;
+  token12.effect1 = Math.pow(1.7, token12.level + compToken5)/* * componentEf1*/;
   token12.price = Math.pow(10, 124) * Math.pow(10, token12.level) / softUpgrade3
   //expansor
 
@@ -1842,7 +1844,7 @@ function valuesSetter() {
 
   var selMon = IExpansor.monuments.monument14
 
-  selMon.req1 = (1 * 10 ** 27);
+  selMon.req1 = (1 * 10 ** 29);
   selMon.req2 = 0
   selMon.req3 = 0;
   selMon.req4 = 0;
@@ -1858,26 +1860,26 @@ function valuesSetter() {
 
   selMon.req1 = 0
   selMon.req2 = 0
-  selMon.req3 = (6 * 10 ** 3);
+  selMon.req3 = (1 * 10 ** 8);
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument17
 
-  selMon.req1 = (1 * 10 ** 38)
+  selMon.req1 = (1 * 10 ** 42)
   selMon.req2 = 0
   selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument18
 
-  selMon.req1 = (1 * 10 ** 40)
+  selMon.req1 = (1 * 10 ** 45)
   selMon.req2 = 0
   selMon.req3 = 0;
   selMon.req4 = 0;
 
   var selMon = IExpansor.monuments.monument19
 
-  selMon.req1 = (1 * 10 ** 45)
+  selMon.req1 = (1 * 10 ** 48)
   selMon.req2 = 0
   selMon.req3 = 0;
   selMon.req4 = 0;
@@ -1892,7 +1894,7 @@ function valuesSetter() {
   var selMon = IExpansor.monuments.monument21
 
   selMon.req1 = 0
-  selMon.req2 = (1 * 10 ** 15)
+  selMon.req2 = (1 * 10 ** 20)
   selMon.req3 = 0
   selMon.req4 = 0;
 
@@ -2154,8 +2156,6 @@ function valuesSetter() {
   var sel8 = IEnergy.energyUpgrades.energyButton8.level
 
   var totalLevel3 = sel7 + sel8
-
-  console.log(totalLevel3)
 
   if (IEnergy.energyUpgrades.energyButton2.level > 0) {
     var Button2Ef = IEnergy.energyUpgrades.energyButton2.effect
@@ -3025,7 +3025,6 @@ document.getElementById("respecEnergy3").onclick = function () {
   i = 0;
   for (x in IEnergy.energyUpgrades) {
     if (i > 5 && i < 9) {
-      console.log(x)
       IEnergy.energyUpgrades[x].level = 0;
     }
     i = i + 1
@@ -3319,6 +3318,8 @@ function loopShow() {
   //initial
 
   if (IShowableClass.init) {
+    ITopProgress.actualProgress = 1;
+
     unlockShow("hardwareSummary", true)
     unlockShow("softwareSummary", false)
     unlockShow("communicationSummary", false)
@@ -3326,8 +3327,9 @@ function loopShow() {
     unlockShow("visualModule3", false)
 
     //kardashevs
+    unlockShow("progressTab", true)
 
-    unlockShow("A1", true)
+    unlockShow("A1", false)
     unlockShow("A2", false)
     unlockShow("A3", false)
     unlockShow("A4", false)
@@ -3408,6 +3410,15 @@ function loopShow() {
   }
 
   //valutes
+
+  if(IGameData.cells >= 100){
+    unlockShow("hardwareTab", true)
+  }
+
+  if(checkShow("hardwareTab")){
+    unlockShow("A1", true)
+  }
+
   if (checkShow("A2")) {
     unlockShow("assimilatedValute", true)
     unlockShow("softwareSummary", true)
@@ -3422,12 +3433,50 @@ function loopShow() {
   }
 
   if (ITopProgress.progress.p1Check()) {
+    unlockShow("hardwareTab", true)
     if (ITopProgress.actualProgress < 2) {
       ITopProgress.actualProgress = 2;
       unlockShow("p2", true)
-      unlockShow("hardwareTab", true)
+      
     }
   }
+
+  if (ITopProgress.progress.p2Check()) {
+    if (ITopProgress.actualProgress < 3) {
+      ITopProgress.actualProgress = 3;
+      unlockShow("p3", true)
+    }
+  }
+
+
+  if (ITopProgress.progress.p3Check()) {
+    if (ITopProgress.actualProgress < 4) {
+      ITopProgress.actualProgress = 4;
+      unlockShow("p4", true)
+    }
+  }
+
+  if (ITopProgress.progress.p4Check()) {
+    if (ITopProgress.actualProgress < 5) {
+      ITopProgress.actualProgress = 5;
+      unlockShow("p5", true)
+    }
+  }
+
+  if (ITopProgress.progress.p5Check()) {
+    if (ITopProgress.actualProgress < 6) {
+      ITopProgress.actualProgress = 6;
+      unlockShow("p6", true)
+    }
+  }
+
+  if (ITopProgress.progress.p6Check()) {
+    if (ITopProgress.actualProgress < 7) {
+      ITopProgress.actualProgress = 6;
+      unlockShow("p6", true)
+    }
+  }
+
 
   //expansor
 

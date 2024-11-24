@@ -469,42 +469,42 @@ button,
 
 #assimilationBaseGridbutton1 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 1;
   grid-column-end: 4;
 }
 
 #assimilationBaseGridbutton2 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 4;
   grid-column-end: 7;
 }
 
 #assimilationBaseGridbutton3 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 7;
   grid-column-end: 10;
 }
 
 #assimilationBaseGridbutton4 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 1;
   grid-column-end: 4;
 }
 
 #assimilationBaseGridbutton5 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 4;
   grid-column-end: 7;
 }
 
 #assimilationBaseGridbutton6 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 7;
   grid-column-end: 10;
 }
@@ -701,11 +701,6 @@ input[type=text] {
   overflow-y: scroll;
 }
 
-#progress>div {
-  padding: 1%;
-  width: 50%;
-}
-
 #progressTab {
   position: absolute;
   left: 0%;
@@ -747,8 +742,7 @@ input[type=text] {
 
 .tokenSizes {
   width: 20%;
-
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
 }
 
 #componentsEquip {
@@ -1794,21 +1788,21 @@ input[type=text] {
 
 #assimilationBaseGridbutton7 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 1;
   grid-column-end: 4;
 }
 
 #assimilationBaseGridbutton8 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 4;
   grid-column-end: 7;
 }
 
 #assimilationBaseGridbutton9 {
   grid-row-start: 3;
-  grid-row-end: 7;
+  grid-row-end: 9;
   grid-column-start: 7;
   grid-column-end: 10;
 }
@@ -1991,4 +1985,36 @@ width: 100%;
 
   justify-content: center; /* Centra orizzontalmente */
   align-items: center;
+}
+
+.chapter {
+
+  height:max-content; 
+
+  width:100%;
+
+  display: flex;
+
+  flex-direction: row;
+  background: #313131;
+}
+.chapter img {
+  width: 50%;
+  left: 0%;
+}
+
+.chapter-content {
+  width: 25%;
+  left: 75%;
+
+  background: #313131;
+
+  padding: 1%;
+}
+
+.chapter-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: goldenrod;
+  text-transform: uppercase;
 }
